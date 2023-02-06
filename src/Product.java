@@ -16,10 +16,12 @@ public class Product {
         this.productCost = productCost;
     }
 
+    //removes spaces, vowels, and illegal characters to make the productID
     public static String shortenBookTitle(String title) {
         title = title.toLowerCase().replaceAll("\\s", "");
         title = title.replaceAll("[^a-z, 0-9]", "");
         title = title.replaceAll("[aeiou]", "");
+        //limits the length to 8
         if (title.length() > 8) {
             title = title.substring(0, 8);
         }
