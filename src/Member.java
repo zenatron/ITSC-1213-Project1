@@ -2,7 +2,7 @@
 public class Member {
     private String firstName;
     private String lastName;
-    private int id;
+    private int memberID;
     private boolean premium;
     private String paymentType;
     private double totalSpent;
@@ -11,7 +11,7 @@ public class Member {
     public Member(String firstName, String lastName, boolean premium, String paymentType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = (int) (Math.random()*10000);
+        this.memberID = (int) (Math.random()*10000);
         this.premium = premium;
         this.paymentType = paymentType;
         this.totalSpent = 0.00;
@@ -21,7 +21,7 @@ public class Member {
     public Member() {
         this.firstName = "John";
         this.lastName = "Smith";
-        this.id = (int) (Math.random()*10000);
+        this.memberID = (int) (Math.random()*10000);
         this.premium = false;
         this.paymentType = "none";
         this.totalSpent = 0.00;
@@ -29,7 +29,7 @@ public class Member {
 
     //Print method
     public void printMember() {
-        System.out.println("Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Premium Status: " + premium + " | Payment Type: " + paymentType + " | Total Spent: $" + totalSpent);
+        System.out.println("Member >> " + lastName + ", " + firstName + " | ID: " + memberID + " | Premium Status: " + premium + " | Payment Type: " + paymentType + " | Total Spent: $" + totalSpent);
     }
 
 
@@ -47,8 +47,8 @@ public class Member {
         this.lastName = lastName;
     }
     //No setter for ID because it does not change
-    public int getId() {
-        return id;
+    public int getID() {
+        return memberID;
     }
     
     public boolean isPremium() {
@@ -66,7 +66,7 @@ public class Member {
     public double getTotalSpent() {
         return totalSpent;
     }
-    public void setTotalSpent(double totalSpent) {
-        this.totalSpent = totalSpent;
+    public void addToTotalSpent(double dollars) {
+        this.totalSpent += dollars;
     }
 }
