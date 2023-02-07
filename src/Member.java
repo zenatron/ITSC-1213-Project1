@@ -11,7 +11,7 @@ public class Member {
     public Member(String firstName, String lastName, boolean premium, String paymentType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.memberID = (int) (Math.random()*10000);
+        this.memberID = (int) (Math.random() * 10000);
         this.premium = premium;
         this.paymentType = paymentType;
         this.totalSpent = 0.00;
@@ -21,7 +21,7 @@ public class Member {
     public Member() {
         this.firstName = "John";
         this.lastName = "Smith";
-        this.memberID = (int) (Math.random()*10000);
+        this.memberID = (int) (Math.random() * 10000);
         this.premium = false;
         this.paymentType = "none";
         this.totalSpent = 0.00;
