@@ -1,5 +1,5 @@
-
-public class Member {
+public class Member 
+{
     private String firstName;
     private String lastName;
     private int memberID;
@@ -8,7 +8,8 @@ public class Member {
     private double totalSpent;
 
     //Good Constructor
-    public Member(String firstName, String lastName, boolean premium, String paymentType) {
+    public Member(String firstName, String lastName, boolean premium, String paymentType) 
+    {
         this.firstName = firstName;
         this.lastName = lastName;
         this.memberID = (int) (Math.random() * 10000);
@@ -18,7 +19,8 @@ public class Member {
     }
 
     //Default (bad) constructor
-    public Member() {
+    public Member() 
+    {
         this.firstName = "John";
         this.lastName = "Smith";
         this.memberID = (int) (Math.random() * 10000);
@@ -28,45 +30,57 @@ public class Member {
     }
 
     //Print method
-    public void printMember() {
+    public void printMember() 
+    {
         System.out.println("Member >> " + lastName + ", " + firstName + " | ID: " + memberID + " | Premium Status: " + premium + " | Payment Type: " + paymentType + " | Total Spent: $" + totalSpent);
     }
 
 
     //Getters and setters for all the variables
-    public String getFirstName() {
+    public String getFirstName() 
+    {
         return firstName;
     }
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) 
+    {
         this.firstName = firstName;
     }
-    public String getLastName() {
+    public String getLastName() 
+    {
         return lastName;
     }
-    public void setLastName(String lastName) {
+    public void setLastName(String lastName) 
+    {
         this.lastName = lastName;
     }
     //No setter for ID because it does not change
-    public int getID() {
+    public int getID() 
+    {
         return memberID;
     }
     
-    public boolean isPremium() {
+    public boolean isPremium() 
+    {
         return premium;
     }
-    public void setPremium(boolean premium) {
+    public void setPremium(boolean premium) 
+    {
         this.premium = premium;
     }
-    public String getPaymentType() {
+    public String getPaymentType() 
+    {
         return paymentType;
     }
-    public void setPaymentType(String paymentType) {
+    public void setPaymentType(String paymentType) 
+    {
         this.paymentType = paymentType;
     }
-    public double getTotalSpent() {
+    public double getTotalSpent() 
+    {
         return totalSpent;
     }
-    public void addToTotalSpent(double dollars) {
+    public void addToTotalSpent(double dollars) 
+    {
         this.totalSpent += dollars;
     }
 }

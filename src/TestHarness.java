@@ -1,5 +1,7 @@
-public class TestHarness {
-    public static void main(String[] args) {
+public class TestHarness 
+{
+    public static void main(String[] args) 
+    {
 
         Bookstore store = new Bookstore();
         store.initTestProducts();

@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 
-public class Bookstore {
-
+public class Bookstore 
+{
     //inventory manager here
     public static ArrayList<Product> inventory;
 
-    public void initTestProducts() {
+    public void initTestProducts() 
+    {
         //Initializes some test products and adds them to the inventory
         inventory = new ArrayList<Product>();
         Product product1 = new Book("Fahrenheit 451", 19.99);
@@ -16,38 +17,46 @@ public class Bookstore {
         addIntoInventory(product3);
     }
 
-    public static Product getProductByElement(int element) {
+    public static Product getProductByElement(int element) 
+    {
         return inventory.get(element);
     }
 
-    public static Product getProductByName(String name) {
-        for (Product product : inventory) {
-            if (product.getProductName() == name) {
+    public static Product getProductByName(String name) 
+    {
+        for (Product product : inventory) 
+        {
+            if (product.getProductName() == name) 
+            {
                 return product;
             }
         }
         return null;
     }
 
-    public static Product getProductByID(String ID) {
-        for (Product product : inventory) {
-            if (product.getProductID().equals(ID)) {
+    public static Product getProductByID(String ID) 
+    {
+        for (Product product : inventory) 
+        {
+            if (product.getProductID().equals(ID)) 
+            {
                 return product;
             }
         }
         return null;
     }
 
-    public static Product getProductByType(String type) {
-        for (Product product : inventory) {
-            if (product.getProductType().equals(type)) {
-                return product;
-            }
-        }
-        return null;
-    }
+    // public static Product getProductByType(String type) {
+    //     for (Product product : inventory) {
+    //         if (product.getProductType().equals(type)) {
+    //             return product;
+    //         }
+    //     }
+    //     return null;
+    // }
 
-    public void makePurchase(Member member, Product product) {
+    public void makePurchase(Member member, Product product) 
+    {
         member.addToTotalSpent(product.getProductCost());
         removeFromInventory(product);
         //adds the cost of the product to the member's total spend
@@ -55,22 +64,29 @@ public class Bookstore {
     }
     
     //Inventory management methods
-    public static boolean checkInStock(String name) {
-        for (Product product : inventory) {
-            if (product.getProductName().equals(name)) {
+    public static boolean checkInStock(String name) 
+    {
+        for (Product product : inventory) 
+        {
+            if (product.getProductName().equals(name)) 
+            {
                 return true;
             }
         }
         return false;
     }
 
-    public void addIntoInventory(Product product) {
+    public void addIntoInventory(Product product) 
+    {
         inventory.add(product);
     }
 
-    public void removeFromInventory(Product item) {
-        for (Product product : inventory) {
-            if (product.equals(item)) {
+    public void removeFromInventory(Product item) 
+    {
+        for (Product product : inventory) 
+        {
+            if (product.equals(item)) 
+            {
                 inventory.remove(product);
                 return;
             }
