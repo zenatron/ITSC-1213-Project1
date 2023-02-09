@@ -1,17 +1,21 @@
 public class Product {
 
+    //Probably should make these final
     private String productName;
     private String productID;
     private double productCost;
+    private String productType;
 
-    public Product(String productName, String productID, double productCost) {
+    //Do NOT use this constructor for standard instantiation
+    public Product(String productName, String productID, double productCost, String productType) {
         this.productName = productName;
         this.productID = productID;
         this.productCost = productCost;
+        this.productType = productType;
     }
 
-    //The constructor that should be used the most
-    public Product(String productName, double productCost) {
+    //This constructor should be used
+    public Product(String productName, double productCost, String productType) {
         this.productName = productName;
 
         //if there is a product with the same productID, it needs to append a random number to it
@@ -21,8 +25,10 @@ public class Product {
         else {this.productID = shortenBookTitle(productName);}
 
         this.productCost = productCost;
+        this.productType = productType;
     }
 
+    //Prints the product variables
     public void printProduct() {
         System.out.println("Product: " + productName + " || with ID: " + productID + " || price: " + productCost);
     }
@@ -39,6 +45,8 @@ public class Product {
         return title;
     }
 
+    //Getters for all the product variables
+    //No setters because once they don't change
     public String getProductName() {
         return productName;
     }
@@ -49,5 +57,9 @@ public class Product {
 
     public double getProductCost() {
         return productCost;
+    }
+
+    public String getProductType() {
+        return productType;
     }
 }

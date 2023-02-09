@@ -6,10 +6,11 @@ public class Bookstore {
     public static ArrayList<Product> inventory;
 
     public void initTestProducts() {
+        //Initializes some test products and adds them to the inventory
         inventory = new ArrayList<Product>();
-        Product product1 = new Product("Fahrenheit 451", 19.99);
-        Product product2 = new Product("1984", 22.79);
-        Product product3 = new Product("Animal Farm", 8.49);
+        Product product1 = new Book("Fahrenheit 451", 19.99);
+        Product product2 = new DVD("1984 The Musical", 22.79);
+        Product product3 = new CD("Animal Farm Song", 8.49);
         addIntoInventory(product1);
         addIntoInventory(product2);
         addIntoInventory(product3);
@@ -37,12 +38,20 @@ public class Bookstore {
         return null;
     }
 
+    public static Product getProductByType(String type) {
+        for (Product product : inventory) {
+            if (product.getProductType().equals(type)) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public void makePurchase(Member member, Product product) {
         member.addToTotalSpent(product.getProductCost());
         removeFromInventory(product);
         //adds the cost of the product to the member's total spend
         //remove the product from the inventory
-
     }
     
     //Inventory management methods

@@ -7,7 +7,7 @@ public class Member {
     private String paymentType;
     private double totalSpent;
 
-    //Constructor
+    //Good Constructor
     public Member(String firstName, String lastName, boolean premium, String paymentType) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,7 +17,7 @@ public class Member {
         this.totalSpent = 0.00;
     }
 
-    //Default constructor
+    //Default (bad) constructor
     public Member() {
         this.firstName = "John";
         this.lastName = "Smith";
