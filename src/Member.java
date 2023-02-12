@@ -2,37 +2,44 @@ public class Member
 {
     private String firstName;
     private String lastName;
-    private int memberID;
+    private long id;
     private boolean premium;
-    private String paymentType;
     private double totalSpent;
 
     //Good Constructor
-    public Member(String firstName, String lastName, boolean premium, String paymentType) 
+    public Member(String firstName, String lastName, boolean premium) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.memberID = (int) (Math.random() * 10000);
+        this.id = hash();
         this.premium = premium;
-        this.paymentType = paymentType;
         this.totalSpent = 0.00;
     }
 
     //Default (bad) constructor
-    public Member() 
-    {
-        this.firstName = "John";
-        this.lastName = "Smith";
-        this.memberID = (int) (Math.random() * 10000);
-        this.premium = false;
-        this.paymentType = "none";
-        this.totalSpent = 0.00;
-    }
+    // public Member() 
+    // {
+    //     this.firstName = "John";
+    //     this.lastName = "Smith";
+    //     this.id = (int) (Math.random() * 10000);
+    //     this.premium = false;
+    //     this.paymentType = "none";
+    //     this.totalSpent = 0.00;
+    // }
 
     //Print method
-    public void printMember() 
+    public String toString() 
     {
-        System.out.println("Member >> " + lastName + ", " + firstName + " | ID: " + memberID + " | Premium Status: " + premium + " | Payment Type: " + paymentType + " | Total Spent: $" + totalSpent);
+        return "Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Premium Status: " + premium + " | Total Spent: $" + totalSpent;
+    }
+
+    public long hash() 
+    {
+        //Returns generated member id
+        long result = 17;
+        result = 37 * result + firstName.hashCode();
+        result = 37 * result + lastName.hashCode();
+        return result;
     }
 
 
@@ -54,31 +61,26 @@ public class Member
         this.lastName = lastName;
     }
     //No setter for ID because it does not change
-    public int getID() 
+    public long getId() 
     {
-        return memberID;
+        return id;
     }
     
     public boolean isPremium() 
     {
         return premium;
     }
+    
     public void setPremium(boolean premium) 
     {
         this.premium = premium;
     }
-    public String getPaymentType() 
-    {
-        return paymentType;
-    }
-    public void setPaymentType(String paymentType) 
-    {
-        this.paymentType = paymentType;
-    }
+
     public double getTotalSpent() 
     {
         return totalSpent;
     }
+
     public void addToTotalSpent(double dollars) 
     {
         this.totalSpent += dollars;

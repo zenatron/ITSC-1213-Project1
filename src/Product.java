@@ -1,43 +1,39 @@
-public class Product 
+public abstract class Product 
 {
 
     //Probably should make these final
-    private String productName;
-    private String productID;
-    private double productCost;
-    private String productType;
-
+    protected String title;
+    protected String author;
+    protected long id;
+    protected double cost;
+    protected int quantity;
+    
     //Do NOT use this constructor for standard instantiation
-    public Product(String productName, String productID, double productCost, String productType) 
-    {
-        this.productName = productName;
-        this.productID = productID;
-        this.productCost = productCost;
-        this.productType = productType;
-        //TODO add author
-    }
+    // public Product(String productName, String productID, double productCost, String productType) 
+    // {
+    //     this.title = productName;
+    //     this.id = productID;
+    //     this.cost = productCost;
+    //     this.type = productType;
+    //     //TODO add author
+    // }
 
     //This constructor should be used
-    public Product(String productName, double productCost, String productType) 
+    public Product(String title, String author, double cost) 
     {
-        this.productName = productName;
-
-        //if there is a product with the same productID, it appends a random number to it
-        if (Bookstore.checkInStock(productName) == true) 
-        {
-            this.productID = (shortenBookTitle(productName) + String.valueOf((int) (Math.random() * 10000)));
-        }
-        else {this.productID = shortenBookTitle(productName);}
-
-        this.productCost = productCost;
-        this.productType = productType;
+        this.title = title;
+        this.author = author;
+        //this.id = hash();
+        this.cost = cost;
+        this.quantity = 0;
     }
 
+    public abstract long hash();
+    
     //Prints the product variables
-    //TODO add type to print
-    public void printProduct()
+    public String toString()
     {
-        System.out.println("Product: " + productName + " || with ID: " + productID + " || price: " + productCost);
+        return "Product: " + title + " || with ID: " + id + " || price: " + cost;
     }
 
     //removes spaces, vowels, and illegal characters to make the productID
@@ -55,23 +51,26 @@ public class Product
 
     //Getters for all the product variables
     //No setters because they don't change
-    public String getProductName() 
+    public String getTitle() 
     {
-        return productName;
+        return title;
     }
 
-    public String getProductID() 
+    public long getId() 
     {
-        return productID;
+        return id;
     }
 
-    public double getProductCost() 
+    public double getCost() 
     {
-        return productCost;
+        return cost;
     }
 
-    public String getProductType() 
-    {
-        return productType;
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
