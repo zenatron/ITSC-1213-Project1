@@ -2,31 +2,57 @@ import java.util.ArrayList;
 
 public class Bookstore 
 {
-    //inventory manager here
-    public static ArrayList<Product> inventory;
+    public ArrayList<Member> memberList = new ArrayList<>();
+    public ArrayList<Product> inventory = new ArrayList<>();
+    public ArrayList<Transaction> transactions = new ArrayList<>();
+    private long transactionCounter;
 
-    public void initTestProducts() 
+    public Bookstore()
     {
-        //Initializes some test products and adds them to the inventory
-        inventory = new ArrayList<Product>();
-        Product product1 = new Book("Fahrenheit 451", 19.99);
-        Product product2 = new DVD("1984 The Musical", 22.79);
-        Product product3 = new CD("Animal Farm Song", 8.49);
-        addIntoInventory(product1);
-        addIntoInventory(product2);
-        addIntoInventory(product3);
+        transactionCounter = 0;
     }
 
-    public static Product getProductByElement(int element) 
+    public void addTransaction(long memberId, long productId, PaymentType paymentType, double amount)
     {
-        return inventory.get(element);
+        transactionCounter++;
+        Transaction t = new Transaction(productId, memberId, productId, paymentType, amount);
+        transactions.add(t);
     }
 
-    public static Product getProductByName(String name) 
+    // public Product getProductByElement(int element) 
+    // {
+    //     return inventory.get(element);
+    // }
+
+    // public Product getProductByName(String name) 
+    // {
+    //     for (Product product : inventory) 
+    //     {
+    //         if (product.getTitle() == name) 
+    //         {
+    //             return product;
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    public Member getMemberByID(long id) 
     {
-        for (Product product : inventory) 
+        for (Member member : memberList) 
         {
-            if (product.getProductName() == name) 
+            if (member.getId() == id) 
+            {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    public Product getProductByID(long id) 
+    {
+        for (Product product : inventory)
+        {
+            if (product.getId() == id) 
             {
                 return product;
             }
@@ -34,16 +60,25 @@ public class Bookstore
         return null;
     }
 
-    public static Product getProductByID(String ID) 
+    public Transaction getTransactionByID(long id) 
     {
-        for (Product product : inventory) 
+        for (Transaction transaction : transactions) 
         {
-            if (product.getProductID().equals(ID)) 
+            if (transaction.getId() == id)
             {
-                return product;
+                return transaction;
             }
         }
         return null;
+    }
+
+    public void addMember(Member member)
+    {
+        if (getMemberByID(member.getId()) == null)
+        {
+            memberList.add(member);
+        }
+        return;
     }
 
     // public static Product getProductByType(String type) {
@@ -54,42 +89,65 @@ public class Bookstore
     //     }
     //     return null;
     // }
-
-    public void makePurchase(Member member, Product product) 
-    {
-        member.addToTotalSpent(product.getProductCost());
-        removeFromInventory(product);
-        //adds the cost of the product to the member's total spend
-        //remove the product from the inventory
-    }
     
     //Inventory management methods
-    public static boolean checkInStock(String name) 
+    public boolean checkInStock(Product product, int requestedQty) 
     {
-        for (Product product : inventory) 
+        Product p = getProductByID(product.getId());
+        if (p == null)
         {
-            if (product.getProductName().equals(name)) 
-            {
-                return true;
-            }
+            return false;
         }
-        return false;
+        else 
+        {
+            int available = p.getQuantity();
+            return available >= requestedQty;
+        }
     }
 
-    public void addIntoInventory(Product product) 
+    public void addIntoInventory(Product product, int numItems) 
     {
-        inventory.add(product);
+        Product p = getProductByID(product.getId());
+        //Checks if the product already exists
+        if (p == null)
+        {
+            product.setQuantity(numItems);
+            inventory.add(product);
+            System.out.println("Added: " + product);
+        }
+        else 
+        {
+            p.setQuantity(p.getQuantity() + numItems);
+            System.out.println("NOT Added: " + product);
+        }
     }
 
-    public void removeFromInventory(Product item) 
+    //Call only when checkInStock == true
+    public void removeFromInventory(Product product, int numItems) 
     {
-        for (Product product : inventory) 
+        Product p = getProductByID(product.getId());
+        p.setQuantity(p.getQuantity() - numItems);
+    }
+
+    //Returns false if makePurchase fails
+    public boolean makePurchase(Member member, Product product, int requestedQty, PaymentType paymentType)
+    {
+        addMember(member); //Member will be added into system if doesn't exist in system
+        if (checkInStock(product, requestedQty) == false) //Checks if requestedQty is in stock
         {
-            if (product.equals(item)) 
-            {
-                inventory.remove(product);
-                return;
-            }
+            return false;
         }
+        removeFromInventory(product, requestedQty); //Removes requestedQty from stock
+        double charge = requestedQty * product.getCost(); //Gets total cost
+        member.addToTotalSpent(charge); //Adds to member's total spent
+
+        addTransaction(member.getId(), product.getId(), paymentType, charge); //Adds the transaction to transactionList
+
+        return true;
+    }
+
+    public void collectMonthlyFee()
+    {
+        //TODO run once a month to iterate through premium members and collect fee
     }
 }
