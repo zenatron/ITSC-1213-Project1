@@ -1,7 +1,5 @@
 public abstract class Product 
 {
-
-    //Probably should make these final
     protected String title;
     protected String author;
     protected long id;
@@ -33,7 +31,7 @@ public abstract class Product
     //Prints the product variables
     public String toString()
     {
-        return "Product: " + title + " || with ID: " + id + " || price: " + cost;
+        return "Product: " + title + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
     //removes spaces, vowels, and illegal characters to make the productID

@@ -1,6 +1,7 @@
 public class PaymentType 
 {
     //Sketch class to be subclassed into individual payment types
+    //TODO implement this
     private String creditCardInfo;
     private String moneyOrderInfo;
     private String checkInfo;

@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 public class Transaction 
 {
     private long id;
@@ -5,8 +7,9 @@ public class Transaction
     private long productId;
     private PaymentType paymentType;
     private double amount;
+    private String timestamp;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    //TODO add date, timestamp
 
     public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
     {
@@ -15,11 +18,12 @@ public class Transaction
         this.productId = productId;
         this.paymentType = paymentType;
         this.amount = amount;
+        this.timestamp = sdf.format(System.currentTimeMillis());
     }
 
     public String toString()
     {
-        return "Transaction >>> " + id + " Member: " + memberId + " Product: " + productId + " Amt: " + amount; 
+        return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " ||Time: " + timestamp; 
     }
 
     public long getId() {
@@ -61,4 +65,13 @@ public class Transaction
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public String getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+    
 }

@@ -2,6 +2,7 @@ public class CD extends Product
 {
     private String album;
     //CDs are for audio and music
+    //Includes album field
 
     public CD(String title, String author, String album, double cost) 
     {
@@ -13,7 +14,7 @@ public class CD extends Product
     @Override
     public long hash() 
     {
-        //Returns generated id
+        //Returns generated hash
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();

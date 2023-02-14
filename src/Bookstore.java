@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Bookstore 
 {
-    public ArrayList<Member> memberList = new ArrayList<>();
-    public ArrayList<Product> inventory = new ArrayList<>();
-    public ArrayList<Transaction> transactions = new ArrayList<>();
+    public ArrayList<Member> memberList = new ArrayList<Member>();
+    public ArrayList<Product> inventory = new ArrayList<Product>();
+    public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private long transactionCounter;
 
     public Bookstore()
@@ -14,6 +14,7 @@ public class Bookstore
 
     public void addTransaction(long memberId, long productId, PaymentType paymentType, double amount)
     {
+        //Increments transaction counter, instantiates a new Transaction, and adds it to the transactions ArrayList
         transactionCounter++;
         Transaction t = new Transaction(productId, memberId, productId, paymentType, amount);
         transactions.add(t);
@@ -105,28 +106,28 @@ public class Bookstore
         }
     }
 
-    public void addIntoInventory(Product product, int numItems) 
+    public void addIntoInventory(Product product, int qty) 
     {
         Product p = getProductByID(product.getId());
         //Checks if the product already exists
         if (p == null)
         {
-            product.setQuantity(numItems);
+            product.setQuantity(qty);
             inventory.add(product);
             System.out.println("Added: " + product);
         }
         else 
         {
-            p.setQuantity(p.getQuantity() + numItems);
+            p.setQuantity(p.getQuantity() + qty);
             System.out.println("NOT Added: " + product);
         }
     }
 
     //Call only when checkInStock == true
-    public void removeFromInventory(Product product, int numItems) 
+    public void removeFromInventory(Product product, int qty) 
     {
         Product p = getProductByID(product.getId());
-        p.setQuantity(p.getQuantity() - numItems);
+        p.setQuantity(p.getQuantity() - qty);
     }
 
     //Returns false if makePurchase fails
@@ -149,5 +150,6 @@ public class Bookstore
     public void collectMonthlyFee()
     {
         //TODO run once a month to iterate through premium members and collect fee
+        //Stub method
     }
 }
