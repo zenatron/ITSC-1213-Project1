@@ -89,6 +89,7 @@ public class TestHarness
             System.out.println("\t 8. Exit");
 
             int num = sc.nextInt();
+            sc.nextLine();
 
             switch (num)
             {
@@ -138,7 +139,6 @@ public class TestHarness
                 //TODO FIX FORMATTING OF THE TITLE AND AUTHOR FIELDS
                 System.out.println("<<< Adding a New Product >>>");
                 System.out.println("Enter the title of the product");
-                sc.nextLine();
                 String title = sc.nextLine();
                 System.out.println("Enter the author of the product");
                 String author = sc.nextLine();
