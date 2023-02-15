@@ -31,7 +31,7 @@ public abstract class Product
     //Prints the product variables
     public String toString()
     {
-        return "Product: " + title + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+        return "Product: " + title + " Author: " + author + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
     //removes spaces, vowels, and illegal characters to make the productID

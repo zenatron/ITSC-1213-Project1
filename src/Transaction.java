@@ -23,7 +23,7 @@ public class Transaction
 
     public String toString()
     {
-        return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " ||Time: " + timestamp; 
+        return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " || Payment: " + paymentType +" ||Time: " + timestamp; 
     }
 
     public long getId() {

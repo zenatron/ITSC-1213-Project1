@@ -17,7 +17,7 @@ public class TestHarness
         Member member2 = new Member("Azerbath", "Nazar", true);
         Member member3 = new Member("Georgiy", "Smesharik", false);
 
-        //Adds Members into memberList
+        //Adds test Members into memberList
         store.addMember(member1);
         store.addMember(member2);
         store.addMember(member3);
@@ -95,9 +95,10 @@ public class TestHarness
                 case 1:
                 System.out.println("<<< Registering New Member >>>");
                 System.out.println("Enter First Name:");
-                String firstName = sc.next();
+                sc.nextLine();
+                String firstName = sc.nextLine();
                 System.out.println("Enter Last Name:");
-                String lastName = sc.next();
+                String lastName = sc.nextLine();
                 System.out.println("Premium Member? (Y/N)");
                 char letter = sc.next().charAt(0);
                 boolean premium = false;
@@ -137,27 +138,30 @@ public class TestHarness
                 //TODO FIX FORMATTING OF THE TITLE AND AUTHOR FIELDS
                 System.out.println("<<< Adding a New Product >>>");
                 System.out.println("Enter the title of the product");
+                sc.nextLine();
                 String title = sc.nextLine();
                 System.out.println("Enter the author of the product");
                 String author = sc.nextLine();
                 System.out.println("Enter the cost of the product");
                 double newProductCost = sc.nextDouble();
+                sc.nextLine();
                 System.out.println("What kind of product is it? (CD/DVD/Book)");
                 String type = sc.nextLine();
                 System.out.println("Enter many units to add");
                 int units = sc.nextInt();
+                sc.nextLine();
 
-                if (type == "Book" || type == "book" || type == "BOOK")
+                if ("book".equalsIgnoreCase(type))
                 {
                     store.addIntoInventory(new Book(title, author, newProductCost), units);
                 }
-                else if (type == "CD" || type == "cd" || type == "Cd")
+                else if ("cd".equalsIgnoreCase(type))
                 {
                     System.out.println("What is the album for the CD?");
                     String album = sc.nextLine();
                     store.addIntoInventory(new CD(title, author, album, newProductCost), units);
                 }
-                else if (type == "DVD" || type == "dvd" || type == "Dvd")
+                else if ("dvd".equalsIgnoreCase(type))
                 {
                     System.out.println("What is the studio for the DVD?");
                     String studio = sc.nextLine();
@@ -169,12 +173,18 @@ public class TestHarness
                 System.out.println("<<< Adding into Inventory >>>");
                 System.out.println("Enter the ID of the product to edit");
                 long id = sc.nextLong();
+                sc.nextLine();
                 System.out.println("Enter the new quantity");
                 int quantity = sc.nextInt();
-
-                //TODO FINISH IMPLEMENTING THIS 
-
-
+                sc.nextLine();
+                for (Product product : store.inventory)
+                {
+                    if (product.getId() == id)
+                    {
+                        product.setQuantity(quantity);
+                        break;
+                    }
+                }
                 break;
 
                 case 7:
@@ -213,6 +223,7 @@ public class TestHarness
             System.out.println("\t 3. Exit");
 
             int cartNum = scan.nextInt();
+            scan.nextLine();
 
             switch (cartNum)
             {
@@ -220,8 +231,10 @@ public class TestHarness
                 System.out.println("< Adding Items to Cart >");
                 System.out.println("Type product ID to add to cart:");
                 long itemToAdd = scan.nextLong();
+                scan.nextLine();
                 System.out.println("Enter the quantity to add to cart:");
                 int quantityToBuy = scan.nextInt();
+                scan.nextLine();
 
                 for (Product product : store.inventory)
                 {
@@ -245,6 +258,7 @@ public class TestHarness
 
                 System.out.println("Enter ID of Buyer");
                 long id = scan.nextLong();
+                scan.nextLine();
                 for (Member member : store.memberList)
                 {
                     if (member.getId() == id)
@@ -253,7 +267,7 @@ public class TestHarness
                     }
                 }
 
-                System.out.println("Enter Payment Type:");
+                System.out.println("Enter Payment Type: (feature not implemented)");
                 PaymentType pType = new PaymentType();
 
                 System.out.println("Ready to Buy? (Y/N)");
@@ -262,7 +276,11 @@ public class TestHarness
                 {
                     for (Product item : cart.contents)
                     {
-                        store.makePurchase(store.getMemberByID(id), item, item.getQuantity(), pType);
+                        if (store.makePurchase(store.getMemberByID(id), item, item.getQuantity(), pType) == true)
+                        {
+                            System.out.println("Successfully purchased " + item.getTitle());
+                        }
+                        else {System.out.println("Something went wrong!");}
                     }
                 }
                 else

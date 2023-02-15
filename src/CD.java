@@ -21,5 +21,11 @@ public class CD extends Product
         result = 37 * result + album.hashCode();
         return result;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Product: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+    }
     
 }

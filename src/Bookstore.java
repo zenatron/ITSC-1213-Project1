@@ -20,23 +20,6 @@ public class Bookstore
         transactions.add(t);
     }
 
-    // public Product getProductByElement(int element) 
-    // {
-    //     return inventory.get(element);
-    // }
-
-    // public Product getProductByName(String name) 
-    // {
-    //     for (Product product : inventory) 
-    //     {
-    //         if (product.getTitle() == name) 
-    //         {
-    //             return product;
-    //         }
-    //     }
-    //     return null;
-    // }
-
     public Member getMemberByID(long id) 
     {
         for (Member member : memberList) 
@@ -81,15 +64,6 @@ public class Bookstore
         }
         return;
     }
-
-    // public static Product getProductByType(String type) {
-    //     for (Product product : inventory) {
-    //         if (product.getProductType().equals(type)) {
-    //             return product;
-    //         }
-    //     }
-    //     return null;
-    // }
     
     //Inventory management methods
     public boolean checkInStock(Product product, int requestedQty) 
@@ -149,7 +123,6 @@ public class Bookstore
 
     public void collectMonthlyFee()
     {
-        //TODO run once a month to iterate through premium members and collect fee
         //Stub method
     }
 }

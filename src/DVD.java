@@ -21,5 +21,11 @@ public class DVD extends Product
         result = 37 * result + studio.hashCode();
         return result;
     }
-    
+
+    @Override
+    public String toString()
+    {
+        return "Product: " + title + " || Author: " + author + " || Studio: " + studio + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+    }
+        
 }
