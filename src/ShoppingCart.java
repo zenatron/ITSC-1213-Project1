@@ -5,19 +5,23 @@ public class ShoppingCart
     private int itemsInCart;
     private double totalCost;
 
+    //ArrayList of what is inside the Shopping Cart
     public ArrayList<Product> contents = new ArrayList<Product>();
     
+    //Constructor
     public ShoppingCart()
     {
         this.itemsInCart = 0;
         this.totalCost = 0.0;
     }
 
+    //Allows printing of the Shopping Cart
     public String toString()
     {
         return "Cart contains: " + calculateItemsInCart(contents) + " items, totaling: $" + calculateCartTotal(contents);
     }
 
+    //Adds into the contents of the Shopping Cart
     public void addIntoInventory(Product product, int qty) 
     {
         Product p = getProductByID(product.getId());
@@ -36,6 +40,7 @@ public class ShoppingCart
         }
     }
 
+    //Gets the Product from the given id
     public Product getProductByID(long id) 
     {
         for (Product product : contents)
@@ -48,6 +53,7 @@ public class ShoppingCart
         return null;
     }
 
+    //Returns the total cost of everything in the cart
     public double calculateCartTotal(ArrayList<Product> contents)
     {
         double total = 0;
@@ -58,6 +64,7 @@ public class ShoppingCart
         return total;
     }
 
+    //Returns the total number of items in the cart
     public int calculateItemsInCart(ArrayList<Product> contents)
     {
         int total = 0;

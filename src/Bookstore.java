@@ -2,16 +2,19 @@ import java.util.ArrayList;
 
 public class Bookstore 
 {
+    //ArrayLists for the Members, Products, and Transactions
     public ArrayList<Member> memberList = new ArrayList<Member>();
     public ArrayList<Product> inventory = new ArrayList<Product>();
     public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private long transactionCounter;
 
+    //Constructor
     public Bookstore()
     {
         transactionCounter = 0;
     }
 
+    //Adds a Transaction into the transactions ArrayList
     public void addTransaction(long memberId, long productId, PaymentType paymentType, double amount)
     {
         //Increments transaction counter, instantiates a new Transaction, and adds it to the transactions ArrayList
@@ -20,6 +23,7 @@ public class Bookstore
         transactions.add(t);
     }
 
+    //Returns the Member from the given id
     public Member getMemberByID(long id) 
     {
         for (Member member : memberList) 
@@ -32,6 +36,7 @@ public class Bookstore
         return null;
     }
 
+    //Returns the product from the given id
     public Product getProductByID(long id) 
     {
         for (Product product : inventory)
@@ -44,6 +49,7 @@ public class Bookstore
         return null;
     }
 
+    //Returns the transaction from the given id
     public Transaction getTransactionByID(long id) 
     {
         for (Transaction transaction : transactions) 
@@ -56,6 +62,7 @@ public class Bookstore
         return null;
     }
 
+    //Adds a new Member into the memberList
     public void addMember(Member member)
     {
         if (getMemberByID(member.getId()) == null)
@@ -66,6 +73,7 @@ public class Bookstore
     }
     
     //Inventory management methods
+    //Returns true if the number of requested items is in stock for a given Product
     public boolean checkInStock(Product product, int requestedQty) 
     {
         Product p = getProductByID(product.getId());
@@ -80,6 +88,7 @@ public class Bookstore
         }
     }
 
+    //Adds products into inventory
     public void addIntoInventory(Product product, int qty) 
     {
         Product p = getProductByID(product.getId());
@@ -98,6 +107,7 @@ public class Bookstore
     }
 
     //Call only when checkInStock == true
+    //Removes a given qty of Product from inventory
     public void removeFromInventory(Product product, int qty) 
     {
         Product p = getProductByID(product.getId());
@@ -105,6 +115,7 @@ public class Bookstore
     }
 
     //Returns false if makePurchase fails
+    //Core to the Bookstore's functionality
     public boolean makePurchase(Member member, Product product, int requestedQty, PaymentType paymentType)
     {
         addMember(member); //Member will be added into system if doesn't exist in system
@@ -121,6 +132,7 @@ public class Bookstore
         return true;
     }
 
+    //These methods are not used, but may provide additional functionality
     public void collectMonthlyFee()
     {
         //Stub method

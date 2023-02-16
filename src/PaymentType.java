@@ -1,11 +1,12 @@
 public class PaymentType 
 {
     //Sketch class to be subclassed into individual payment types
-    //TODO implement this
+    //This class does not do anything important
     private String creditCardInfo;
     private String moneyOrderInfo;
     private String checkInfo;
 
+    //Generic getters and setters
     public String getCreditCardInfo() 
     {
         return this.creditCardInfo;

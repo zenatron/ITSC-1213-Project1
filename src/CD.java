@@ -4,6 +4,7 @@ public class CD extends Product
     //CDs are for audio and music
     //Includes album field
 
+    //Constructor
     public CD(String title, String author, String album, double cost) 
     {
         super(title, author, cost);
@@ -22,12 +23,14 @@ public class CD extends Product
         return result;
     }
 
+    //Prints the CD
     @Override
     public String toString()
     {
         return "Product: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
+    //Abstract method that allows copying of the object, from the Product class
     public Product copy()
     {
         CD newCD = new CD(title, author, album, cost);

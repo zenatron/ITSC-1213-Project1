@@ -6,7 +6,7 @@ public class Member
     private boolean premium;
     private double totalSpent;
 
-    //Good Constructor
+    //Constructor
     public Member(String firstName, String lastName, boolean premium) 
     {
         this.firstName = firstName;
@@ -16,26 +16,15 @@ public class Member
         this.totalSpent = 0.00;
     }
 
-    //Default (bad) constructor
-    // public Member() 
-    // {
-    //     this.firstName = "John";
-    //     this.lastName = "Smith";
-    //     this.id = (int) (Math.random() * 10000);
-    //     this.premium = false;
-    //     this.paymentType = "none";
-    //     this.totalSpent = 0.00;
-    // }
-
     //Print method
     public String toString() 
     {
         return "Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Premium Status: " + premium + " | Total Spent: $" + totalSpent;
     }
 
+    //Returns generated member id from hash
     public long hash() 
     {
-        //Returns generated member id
         long result = 17;
         result = 37 * result + firstName.hashCode();
         result = 37 * result + lastName.hashCode();

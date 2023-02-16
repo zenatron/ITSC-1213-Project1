@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-
 /*
  * @author pv
  */
@@ -14,7 +12,7 @@ public class TestHarness
 
         //Initializes some test Members
         Member member1 = new Member("Kevin", "Aswani", false);
-        Member member2 = new Member("Azerbath", "Nazar", true);
+        Member member2 = new Member("Bob", "Loblaw", true);
         Member member3 = new Member("Georgiy", "Smesharik", false);
 
         //Adds test Members into memberList
@@ -22,7 +20,7 @@ public class TestHarness
         store.addMember(member2);
         store.addMember(member3);
 
-        //Initializes some test products
+        //Initializes some test Products
         Book book1 = new Book("Fahrenheit 451","Ray Bradbury", 19.99);
         Book book2 = new Book("1984", "George Orwell", 69.99);
         CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
@@ -44,24 +42,24 @@ public class TestHarness
         System.out.println(member2.toString());
         System.out.println(member3.toString());
 
-        //Makes some test purchases
-        store.makePurchase(member1, book1, 10, new PaymentType());
-        store.makePurchase(member2, cd1, 10, new PaymentType());
-        store.makePurchase(member3, book1, 10, new PaymentType());
+        // //Makes some test purchases
+        // store.makePurchase(member1, book1, 10, new PaymentType());
+        // store.makePurchase(member2, cd1, 10, new PaymentType());
+        // store.makePurchase(member3, book1, 10, new PaymentType());
 
-        //Prints the Members again
-        System.out.println(member1.toString());
-        System.out.println(member2.toString());
-        System.out.println(member3.toString());
+        // //Prints the Members again
+        // System.out.println(member1.toString());
+        // System.out.println(member2.toString());
+        // System.out.println(member3.toString());
 
-        //Prints the quantities of products
-        System.out.println(book1.getQuantity());
-        System.out.println(cd1.getQuantity());
-        System.out.println(book2.getQuantity());
+        // //Prints the quantities of products
+        // System.out.println(book1.getQuantity());
+        // System.out.println(cd1.getQuantity());
+        // System.out.println(book2.getQuantity());
 
-        System.out.println(store.transactions.get(0).toString());
-        System.out.println(store.transactions.get(1).toString());
-        System.out.println(store.transactions.get(2).toString());
+        // System.out.println(store.transactions.get(0).toString());
+        // System.out.println(store.transactions.get(1).toString());
+        // System.out.println(store.transactions.get(2).toString());
 
         /* 
          * Stuff we want the user to do through the console:
@@ -135,7 +133,6 @@ public class TestHarness
                 break;
 
                 case 5:
-                //TODO FIX FORMATTING OF THE TITLE AND AUTHOR FIELDS
                 System.out.println("<<< Adding a New Product >>>");
                 System.out.println("Enter the title of the product");
                 String title = sc.nextLine();
@@ -199,10 +196,9 @@ public class TestHarness
                 break;
             }
          }
-
-
     }
 
+    //Displays the Purhcasing Options
     public static void purchaseOptions(Bookstore store)
     {
         Scanner scan = new Scanner(System.in);
@@ -294,5 +290,4 @@ public class TestHarness
             }
         }
     }
-
 }

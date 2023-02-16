@@ -1,6 +1,7 @@
 public class Book extends Product 
 {
     //Books are books
+    //Constructor
     public Book(String title, String author, double cost) 
     {
         super(title, author, cost);
@@ -17,6 +18,7 @@ public class Book extends Product
         return result;
     }
 
+    //Abstract method that allows copying of the object, from the Product class
     public Product copy()
     {
         Book newBook = new Book(title, author, cost);

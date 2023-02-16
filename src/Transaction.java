@@ -10,7 +10,7 @@ public class Transaction
     private String timestamp;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-
+    //Constructor
     public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
     {
         this.id = id;
@@ -21,11 +21,13 @@ public class Transaction
         this.timestamp = sdf.format(System.currentTimeMillis());
     }
 
+    //Allows printing of the Transaction
     public String toString()
     {
         return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " || Payment: " + paymentType +" ||Time: " + timestamp; 
     }
 
+    //Generic getters and setters
     public long getId() {
         return this.id;
     }
@@ -73,5 +75,4 @@ public class Transaction
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-    
 }

@@ -4,6 +4,7 @@ public class DVD extends Product
     //DVDs are for video formats
     //Includes studio field
 
+    //Constructor
     public DVD(String title, String author, String studio, double cost) 
     {
         super(title, author, cost);
@@ -22,12 +23,14 @@ public class DVD extends Product
         return result;
     }
 
+    //Prints the DVD
     @Override
     public String toString()
     {
         return "Product: " + title + " || Author: " + author + " || Studio: " + studio + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
+    //Abstract method that allows copying of the object, from the Product class
     public Product copy()
     {
         DVD newDVD = new DVD(title, author, studio, cost);

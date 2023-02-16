@@ -5,27 +5,17 @@ public abstract class Product
     protected long id;
     protected double cost;
     protected int quantity;
-    
-    //Do NOT use this constructor for standard instantiation
-    // public Product(String productName, String productID, double productCost, String productType) 
-    // {
-    //     this.title = productName;
-    //     this.id = productID;
-    //     this.cost = productCost;
-    //     this.type = productType;
-    //     //TODO add author
-    // }
-
-    //This constructor should be used
+   
+    //Constructor
     public Product(String title, String author, double cost) 
     {
         this.title = title;
         this.author = author;
-        //this.id = hash();
         this.cost = cost;
         this.quantity = 0;
     }
 
+    //Two abstract methods that subclasses must use
     public abstract long hash();
 
     public abstract Product copy();
@@ -34,19 +24,6 @@ public abstract class Product
     public String toString()
     {
         return "Product: " + title + " Author: " + author + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
-    }
-
-    //removes spaces, vowels, and illegal characters to make the productID
-    public static String shortenBookTitle(String title) 
-    {
-        title = title.toLowerCase().replaceAll("\\s", "");
-        title = title.replaceAll("[^a-z, 0-9]", "");
-        title = title.replaceAll("[aeiou]", "");
-        //limits the length to 10
-        if (title.length() > 10) {
-            title = title.substring(0, 10);
-        }
-        return title;
     }
 
     //Getters for all the product variables
