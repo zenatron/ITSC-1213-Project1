@@ -27,5 +27,11 @@ public class DVD extends Product
     {
         return "Product: " + title + " || Author: " + author + " || Studio: " + studio + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
-        
+
+    public Product copy()
+    {
+        DVD newDVD = new DVD(title, author, studio, cost);
+        newDVD.setQuantity(quantity);
+        return newDVD;
+    }        
 }

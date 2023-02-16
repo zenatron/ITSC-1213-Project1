@@ -16,4 +16,11 @@ public class Book extends Product
         result = 37 * result + author.hashCode();
         return result;
     }
+
+    public Product copy()
+    {
+        Book newBook = new Book(title, author, cost);
+        newBook.setQuantity(quantity);
+        return newBook;
+    }
 }

@@ -96,7 +96,6 @@ public class TestHarness
                 case 1:
                 System.out.println("<<< Registering New Member >>>");
                 System.out.println("Enter First Name:");
-                sc.nextLine();
                 String firstName = sc.nextLine();
                 System.out.println("Enter Last Name:");
                 String lastName = sc.nextLine();

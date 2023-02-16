@@ -24,9 +24,10 @@ public class ShoppingCart
         //Checks if the product already exists
         if (p == null)
         {
-            product.setQuantity(qty);
-            contents.add(product);
-            System.out.println("Added: " + product);
+            Product item = product.copy();
+            item.setQuantity(qty);
+            contents.add(item);
+            System.out.println("Added: " + item);
         }
         else 
         {

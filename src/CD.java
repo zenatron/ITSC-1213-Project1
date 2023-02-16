@@ -27,5 +27,11 @@ public class CD extends Product
     {
         return "Product: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
-    
+
+    public Product copy()
+    {
+        CD newCD = new CD(title, author, album, cost);
+        newCD.setQuantity(quantity);
+        return newCD;
+    }    
 }

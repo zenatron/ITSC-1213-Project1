@@ -125,4 +125,9 @@ public class Bookstore
     {
         //Stub method
     }
+
+    public long getLifetimeTransactions()
+    {
+        return transactionCounter;
+    }
 }

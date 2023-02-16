@@ -27,6 +27,8 @@ public abstract class Product
     }
 
     public abstract long hash();
+
+    public abstract Product copy();
     
     //Prints the product variables
     public String toString()
