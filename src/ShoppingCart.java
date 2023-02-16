@@ -87,8 +87,4 @@ public class ShoppingCart
     public double getTotalCost() {
         return this.totalCost;
     }
-
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
-    }
 }

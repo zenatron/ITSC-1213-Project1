@@ -27,7 +27,7 @@ public abstract class Product
     }
 
     //Getters for all the product variables
-    //No setters because they don't change
+    //No setters because they don't change, except for quantity
     public String getTitle() 
     {
         return title;
