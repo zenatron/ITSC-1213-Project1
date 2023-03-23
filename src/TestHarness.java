@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /*
- * @author pv
+ * @author me
  */
 
 public class TestHarness 
