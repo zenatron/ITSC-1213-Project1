@@ -1,11 +1,11 @@
-public class DVD extends Product 
+public class DVD extends Product
 {
     private String studio;
     //DVDs are for video formats
     //Includes studio field
 
     //Constructor
-    public DVD(String title, String author, String studio, double cost) 
+    public DVD(String title, String author, String studio, double cost)
     {
         super(title, author, cost);
         this.studio = studio;
@@ -13,7 +13,7 @@ public class DVD extends Product
     }
 
     @Override
-    public long hash() 
+    public long hash()
     {
         //Returns generated hash
         long result = 17;
@@ -36,5 +36,16 @@ public class DVD extends Product
         DVD newDVD = new DVD(title, author, studio, cost);
         newDVD.setQuantity(quantity);
         return newDVD;
-    }        
+    }
+
+    @Override
+    public void compareTo(Product p1, Product p2)
+    {
+        if (p1.getCost() > p2.getCost())
+            System.out.println("Product 1 costs more");
+        if (p1.getCost() < p2.getCost())
+            System.out.println("Product 2 costs more");
+        if (p1.getCost() == p2.getCost())
+            System.out.println("Product 1 and Product 2 have the same cost");
+    }
 }

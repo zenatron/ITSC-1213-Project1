@@ -25,4 +25,15 @@ public class Book extends Product
         newBook.setQuantity(quantity);
         return newBook;
     }
+
+    @Override
+    public void compareTo(Product p1, Product p2)
+    {
+        if (p1.getCost() > p2.getCost())
+            System.out.println("Product 1 costs more");
+        if (p1.getCost() < p2.getCost())
+            System.out.println("Product 2 costs more");
+        if (p1.getCost() == p2.getCost())
+            System.out.println("Product 1 and Product 2 have the same cost");
+    }
 }

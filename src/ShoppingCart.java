@@ -18,7 +18,7 @@ public class ShoppingCart
     //Allows printing of the Shopping Cart
     public String toString()
     {
-        return "Cart contains: " + calculateItemsInCart(contents) + " items, totaling: $" + calculateCartTotal(contents);
+        return "Cart contains: " + calculateItemsInCart(contents) + " items, totaling: $" + calculateCartTotal();
     }
 
     //Adds into the contents of the Shopping Cart
@@ -54,7 +54,7 @@ public class ShoppingCart
     }
 
     //Returns the total cost of everything in the cart
-    public double calculateCartTotal(ArrayList<Product> contents)
+    public double calculateCartTotal()
     {
         double total = 0;
         for (Product item : contents)

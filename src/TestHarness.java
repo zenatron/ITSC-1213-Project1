@@ -11,9 +11,9 @@ public class TestHarness
         Scanner sc = new Scanner(System.in);
 
         //Initializes some test Members
-        Member member1 = new Member("Kevin", "Aswani", false);
-        Member member2 = new Member("Bob", "Loblaw", true);
-        Member member3 = new Member("Georgiy", "Smesharik", false);
+        Member member1 = new Member("Kevin", "Aswani");
+        Member member2 = new PremiumMember("Bob", "Loblaw");
+        Member member3 = new Member("Georgiy", "Smesharik");
 
         //Adds test Members into memberList
         store.addMember(member1);
@@ -38,45 +38,19 @@ public class TestHarness
         
         //Prints out the size of the inventory and all test Members
         System.out.println(store.inventory.size());
-        System.out.println(member1.toString());
-        System.out.println(member2.toString());
-        System.out.println(member3.toString());
+        System.out.println(member1);
+        System.out.println(member2);
+        System.out.println(member3);
 
         // //Makes some test purchases
         // store.makePurchase(member1, book1, 10, new PaymentType());
         // store.makePurchase(member2, cd1, 10, new PaymentType());
         // store.makePurchase(member3, book1, 10, new PaymentType());
 
-        // //Prints the Members again
-        // System.out.println(member1.toString());
-        // System.out.println(member2.toString());
-        // System.out.println(member3.toString());
-
-        // //Prints the quantities of products
-        // System.out.println(book1.getQuantity());
-        // System.out.println(cd1.getQuantity());
-        // System.out.println(book2.getQuantity());
-
-        // System.out.println(store.transactions.get(0).toString());
-        // System.out.println(store.transactions.get(1).toString());
-        // System.out.println(store.transactions.get(2).toString());
-
-        /* 
-         * Stuff we want the user to do through the console:
-         * 
-         *      Register a new member
-         *      Make a purchase
-         *      Look through the transaction list
-         *      Add a new product
-         *      Update manually stock of existing products
-         *      Check how much is left in stock of products
-         */
-
          while (true)
          {
             //Check what the user wants to do
-            System.out.println("");
-            System.out.println("Select an option by typing a number:");
+            System.out.println("\nSelect an option by typing a number:");
             System.out.println("\t 1. Register New Member");
             System.out.println("\t 2. View Member List");
             System.out.println("\t 3. Make Purchase");
@@ -89,112 +63,89 @@ public class TestHarness
             int num = sc.nextInt();
             sc.nextLine();
 
-            switch (num)
-            {
-                case 1:
-                System.out.println("<<< Registering New Member >>>");
-                System.out.println("Enter First Name:");
-                String firstName = sc.nextLine();
-                System.out.println("Enter Last Name:");
-                String lastName = sc.nextLine();
-                System.out.println("Premium Member? (Y/N)");
-                char letter = sc.next().charAt(0);
-                boolean premium = false;
-                if (letter == 'Y' || letter == 'y')
-                {
-                    premium = true;
-                }
-                Member newMember = new Member(firstName, lastName, premium);
-                store.addMember(newMember);
-
-                System.out.println("New Member Registered with Credentials:");
-                System.out.println(newMember);
-                break;
-
-                case 2:
-                System.out.println("<<< Viewing Member List >>>");
-                for (Member member : store.memberList)
-                {
-                    System.out.println(member);
-                }
-                break;
-
-                case 3:
-                System.out.println("<<< Making a Purchase >>>");
-                purchaseOptions(store);
-                break;
-
-                case 4:
-                System.out.println("<<< Viewing Transaction List >>>");
-                for (Transaction transaction : store.transactions)
-                {
-                    System.out.println(transaction);
-                }
-                break;
-
-                case 5:
-                System.out.println("<<< Adding a New Product >>>");
-                System.out.println("Enter the title of the product");
-                String title = sc.nextLine();
-                System.out.println("Enter the author of the product");
-                String author = sc.nextLine();
-                System.out.println("Enter the cost of the product");
-                double newProductCost = sc.nextDouble();
-                sc.nextLine();
-                System.out.println("What kind of product is it? (CD/DVD/Book)");
-                String type = sc.nextLine();
-                System.out.println("Enter many units to add");
-                int units = sc.nextInt();
-                sc.nextLine();
-
-                if ("book".equalsIgnoreCase(type))
-                {
-                    store.addIntoInventory(new Book(title, author, newProductCost), units);
-                }
-                else if ("cd".equalsIgnoreCase(type))
-                {
-                    System.out.println("What is the album for the CD?");
-                    String album = sc.nextLine();
-                    store.addIntoInventory(new CD(title, author, album, newProductCost), units);
-                }
-                else if ("dvd".equalsIgnoreCase(type))
-                {
-                    System.out.println("What is the studio for the DVD?");
-                    String studio = sc.nextLine();
-                    store.addIntoInventory(new DVD(title, author, studio, newProductCost), units);
-                }
-                break;
-
-                case 6:
-                System.out.println("<<< Adding into Inventory >>>");
-                System.out.println("Enter the ID of the product to edit");
-                long id = sc.nextLong();
-                sc.nextLine();
-                System.out.println("Enter the new quantity");
-                int quantity = sc.nextInt();
-                sc.nextLine();
-                for (Product product : store.inventory)
-                {
-                    if (product.getId() == id)
-                    {
-                        product.setQuantity(quantity);
-                        break;
-                    }
-                }
-                break;
-
-                case 7:
-                System.out.println("<<< Checking Stock >>>");
-                for (Product product : store.inventory)
-                {
-                    System.out.println(product);
-                }
-                break;
-
-                case 8:
-                System.exit(0);
-                break;
-            }
+             switch (num) {
+                 case 1 -> {
+                     System.out.println("<<< Registering New Member >>>");
+                     System.out.println("Enter First Name:");
+                     String firstName = sc.nextLine();
+                     System.out.println("Enter Last Name:");
+                     String lastName = sc.nextLine();
+                     System.out.println("Premium Member? (Y/N)");
+                     char letter = sc.next().charAt(0);
+                     boolean premium = letter == 'Y' || letter == 'y';
+                     Member newMember;
+                     if (premium)
+                     {
+                         newMember = new PremiumMember(firstName, lastName);
+                     }
+                     else
+                     {
+                         newMember = new Member(firstName, lastName);
+                     }
+                     store.addMember(newMember);
+                     System.out.println("New Member Registered with Credentials:");
+                     System.out.println(newMember);
+                 }
+                 case 2 -> {
+                     System.out.println("<<< Viewing Member List >>>");
+                     for (Member member : store.memberList) {
+                         System.out.println(member);
+                     }
+                 }
+                 case 3 -> {
+                     System.out.println("<<< Making a Purchase >>>");
+                     purchaseOptions(store);
+                 }
+                 case 4 -> {
+                     System.out.println("<<< Viewing Transaction List >>>");
+                     for (Transaction transaction : store.transactions) {
+                         System.out.println(transaction);
+                     }
+                 }
+                 case 5 -> {
+                     System.out.println("<<< Adding a New Product >>>");
+                     System.out.println("Enter the title of the product");
+                     String title = sc.nextLine();
+                     System.out.println("Enter the author of the product");
+                     String author = sc.nextLine();
+                     System.out.println("Enter the cost of the product");
+                     double newProductCost = sc.nextDouble();
+                     sc.nextLine();
+                     System.out.println("What kind of product is it? (CD/DVD/Book)");
+                     String type = sc.nextLine();
+                     System.out.println("Enter many units to add");
+                     int units = sc.nextInt();
+                     sc.nextLine();
+                     if ("book".equalsIgnoreCase(type)) {
+                         store.addIntoInventory(new Book(title, author, newProductCost), units);
+                     } else if ("cd".equalsIgnoreCase(type)) {
+                         System.out.println("What is the album for the CD?");
+                         String album = sc.nextLine();
+                         store.addIntoInventory(new CD(title, author, album, newProductCost), units);
+                     } else if ("dvd".equalsIgnoreCase(type)) {
+                         System.out.println("What is the studio for the DVD?");
+                         String studio = sc.nextLine();
+                         store.addIntoInventory(new DVD(title, author, studio, newProductCost), units);
+                     }
+                 }
+                 case 6 -> {
+                     System.out.println("<<< Adding into Inventory >>>");
+                     System.out.println("Enter the ID of the product to edit");
+                     long id = sc.nextLong();
+                     sc.nextLine();
+                     System.out.println("Enter the qty to restock");
+                     int quantity = sc.nextInt();
+                     sc.nextLine();
+                     store.restockProduct(store.getProductByID(id), quantity);
+                 }
+                 case 7 -> {
+                     System.out.println("<<< Checking Stock >>>");
+                     for (Product product : store.inventory) {
+                         System.out.println(product);
+                     }
+                 }
+                 case 8 -> System.exit(0);
+             }
          }
     }
 
@@ -202,7 +153,7 @@ public class TestHarness
     public static void purchaseOptions(Bookstore store)
     {
         Scanner scan = new Scanner(System.in);
-        ShoppingCart cart = new ShoppingCart();
+        //ShoppingCart cart = new ShoppingCart();
         //Print what's in stock
         for (Product product : store.inventory)
         {
@@ -211,8 +162,7 @@ public class TestHarness
         
         while (true)
         {
-            System.out.println("");
-            System.out.println("Select an option by typing a number:");
+            System.out.println("\nSelect an option by typing a number:");
             System.out.println("\t 1. Add a Product to cart");
             System.out.println("\t 2. Check Out");
             System.out.println("\t 3. Exit");
@@ -224,32 +174,6 @@ public class TestHarness
             {
                 case 1:
                 System.out.println("< Adding Items to Cart >");
-                System.out.println("Type product ID to add to cart:");
-                long itemToAdd = scan.nextLong();
-                scan.nextLine();
-                System.out.println("Enter the quantity to add to cart:");
-                int quantityToBuy = scan.nextInt();
-                scan.nextLine();
-
-                for (Product product : store.inventory)
-                {
-                    //Adds the product to cart if the title matches
-                    if (product.getId() == itemToAdd)
-                    {
-                        cart.addIntoInventory(product, quantityToBuy);
-                        break;
-                    }
-                }
-                break;
-
-                case 2:
-                System.out.println("< Checking Out >");
-                System.out.println("Confirm Items in Cart:");
-                for (Product item : cart.contents)
-                {
-                    System.out.println(item);
-                    System.out.println(cart);
-                }
 
                 System.out.println("Enter ID of Buyer");
                 long id = scan.nextLong();
@@ -262,6 +186,46 @@ public class TestHarness
                     }
                 }
 
+                System.out.println("Type product ID to add to cart:");
+                long itemToAdd = scan.nextLong();
+                scan.nextLine();
+                System.out.println("Enter the quantity to add to cart:");
+                int quantityToBuy = scan.nextInt();
+                scan.nextLine();
+
+                for (Product product : store.inventory)
+                {
+                    //Adds the product to cart if the title matches
+                    if (product.getId() == itemToAdd)
+                    {
+                        store.getMemberByID(id).shoppingCart.addIntoInventory(product, quantityToBuy);
+                        break;
+                    }
+                }
+                break;
+
+                case 2:
+                System.out.println("< Checking Out >");
+                System.out.println("Confirm Items in Cart:");
+
+                System.out.println("Confirm ID of Buyer");
+                id = scan.nextLong();
+                scan.nextLine();
+                for (Member member : store.memberList)
+                {
+                    if (member.getId() == id)
+                    {
+                        System.out.println(member);
+                    }
+                }
+
+                for (Product item : store.getMemberByID(id).shoppingCart.contents)
+                {
+                    System.out.println(item);
+                }
+
+                System.out.println("Total Cost in cart:\n\t$" + store.getMemberByID(id).shoppingCart.calculateCartTotal());
+
                 System.out.println("Enter Payment Type: (feature not implemented)");
                 PaymentType pType = new PaymentType();
 
@@ -269,9 +233,9 @@ public class TestHarness
                 char ready = scan.nextLine().charAt(0);
                 if(ready == 'Y' || ready == 'y')
                 {
-                    for (Product item : cart.contents)
+                    for (Product item : store.getMemberByID(id).shoppingCart.contents)
                     {
-                        if (store.makePurchase(store.getMemberByID(id), item, item.getQuantity(), pType) == true)
+                        if (store.makePurchase(store.getMemberByID(id), item, item.getQuantity(), pType))
                         {
                             System.out.println("Successfully purchased " + item.getTitle());
                         }

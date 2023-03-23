@@ -1,4 +1,4 @@
-public abstract class Product 
+public abstract class Product implements Comparable
 {
     protected String title;
     protected String author;
