@@ -56,8 +56,8 @@ public class TestHarness
             System.out.println("\t 3. Make Purchase");
             System.out.println("\t 4. View Transaction List");
             System.out.println("\t 5. Add New Product");
-            System.out.println("\t 6. Add Existing Inventory");
-            System.out.println("\t 7. Check Stock");
+            System.out.println("\t 6. Restock Inventory");
+            System.out.println("\t 7. Display Inventory / Value");
             System.out.println("\t 8. Exit");
 
             int num = sc.nextInt();
@@ -143,6 +143,7 @@ public class TestHarness
                      for (Product product : store.inventory) {
                          System.out.println(product);
                      }
+                     System.out.println("\n\tStore's inventory value:\n\t$" + store.inventoryValue());
                  }
                  case 8 -> System.exit(0);
              }
@@ -198,15 +199,24 @@ public class TestHarness
                     //Adds the product to cart if the title matches
                     if (product.getId() == itemToAdd)
                     {
-                        store.getMemberByID(id).shoppingCart.addIntoInventory(product, quantityToBuy);
-                        break;
+                        //Confirms whether we have the requested number in stock
+                        if (product.getQuantity() < quantityToBuy)
+                        {
+                            System.out.println("We only have " + product.getQuantity() + " in stock of - " + product);
+                            System.out.println("Purchase failed.");
+                            break;
+                        }
+                        else
+                        {
+                            store.getMemberByID(id).shoppingCart.addIntoInventory(product, quantityToBuy);
+                            break;
+                        }
                     }
                 }
                 break;
 
                 case 2:
                 System.out.println("< Checking Out >");
-                System.out.println("Confirm Items in Cart:");
 
                 System.out.println("Confirm ID of Buyer");
                 id = scan.nextLong();
@@ -219,6 +229,7 @@ public class TestHarness
                     }
                 }
 
+                System.out.println("Confirm Items in Cart:");
                 for (Product item : store.getMemberByID(id).shoppingCart.contents)
                 {
                     System.out.println(item);
@@ -239,8 +250,9 @@ public class TestHarness
                         {
                             System.out.println("Successfully purchased " + item.getTitle());
                         }
-                        else {System.out.println("Something went wrong!");}
+                        else {System.out.println("---- Something went wrong! ----");}
                     }
+                    System.out.println("<< Thank you for shopping at Bookstore! >>");
                 }
                 else
                 {

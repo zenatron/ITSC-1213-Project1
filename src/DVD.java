@@ -31,6 +31,7 @@ public class DVD extends Product
     }
 
     //Abstract method that allows copying of the object, from the Product class
+    @Override
     public Product copy()
     {
         DVD newDVD = new DVD(title, author, studio, cost);
