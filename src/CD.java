@@ -40,13 +40,13 @@ public class CD extends Product
     }
 
     @Override
-    public void compareTo(Product p1, Product p2)
+    public void compareTo(Product other)
     {
-        if (p1.getCost() > p2.getCost())
-            System.out.println("Product 1 costs more");
-        if (p1.getCost() < p2.getCost())
-            System.out.println("Product 2 costs more");
-        if (p1.getCost() == p2.getCost())
-            System.out.println("Product 1 and Product 2 have the same cost");
+        if (this.getCost() > other.getCost())
+            System.out.println(this.getTitle() + " costs more");
+        if (this.getCost() < other.getCost())
+            System.out.println(other.getTitle() + " costs more");
+        if (this.getCost() == other.getCost())
+            System.out.println(this.getTitle() + " and " + other.getTitle() + " have the same cost");
     }
 }

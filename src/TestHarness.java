@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 /*
  * @author me
@@ -58,7 +59,8 @@ public class TestHarness
             System.out.println("\t 5. Add New Product");
             System.out.println("\t 6. Restock Inventory");
             System.out.println("\t 7. Display Inventory / Value");
-            System.out.println("\t 8. Exit");
+            System.out.println("\t 8. Compare Products By Cost");
+             System.out.println("\t 9. Exit");
 
             int num = sc.nextInt();
             sc.nextLine();
@@ -145,7 +147,23 @@ public class TestHarness
                      }
                      System.out.println("\n\tStore's inventory value:\n\t$" + store.inventoryValue());
                  }
-                 case 8 -> System.exit(0);
+                 case 8 -> {
+                     System.out.println("<<< Comparing Products by Cost >>>");
+                     for (Product product : store.inventory) {
+                         System.out.println(product);
+                     }
+                     System.out.println("\nEnter the ID of the first product to compare:");
+                     long id = sc.nextLong();
+                     sc.nextLine();
+                     System.out.println(store.getProductByID(id).getTitle());
+                     System.out.println("\nEnter the ID of the second product to compare:");
+                     long id2 = sc.nextLong();
+                     sc.nextLine();
+                     System.out.println(store.getProductByID(id2).getTitle());
+                     System.out.println("Result:");
+                     store.getProductByID(id).compareTo(store.getProductByID(id2));
+                 }
+                 case 9 -> System.exit(0);
              }
          }
     }
@@ -179,17 +197,13 @@ public class TestHarness
                 System.out.println("Enter ID of Buyer");
                 long id = scan.nextLong();
                 scan.nextLine();
-                for (Member member : store.memberList)
-                {
-                    if (member.getId() == id)
-                    {
-                        System.out.println(member);
-                    }
-                }
+                System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
 
                 System.out.println("Type product ID to add to cart:");
                 long itemToAdd = scan.nextLong();
                 scan.nextLine();
+                System.out.println(store.getProductByID(itemToAdd).getTitle());
+
                 System.out.println("Enter the quantity to add to cart:");
                 int quantityToBuy = scan.nextInt();
                 scan.nextLine();
@@ -202,7 +216,7 @@ public class TestHarness
                         //Confirms whether we have the requested number in stock
                         if (product.getQuantity() < quantityToBuy)
                         {
-                            System.out.println("We only have " + product.getQuantity() + " in stock of - " + product);
+                            System.out.println("We only have " + product.getQuantity() + " in stock of - " + product.getTitle());
                             System.out.println("Purchase failed.");
                             break;
                         }
@@ -221,18 +235,12 @@ public class TestHarness
                 System.out.println("Confirm ID of Buyer");
                 id = scan.nextLong();
                 scan.nextLine();
-                for (Member member : store.memberList)
-                {
-                    if (member.getId() == id)
-                    {
-                        System.out.println(member);
-                    }
-                }
+                System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
 
                 System.out.println("Confirm Items in Cart:");
                 for (Product item : store.getMemberByID(id).shoppingCart.contents)
                 {
-                    System.out.println(item);
+                    System.out.println(item.getTitle() + " qty: " + item.getQuantity());
                 }
 
                 System.out.println("Total Cost in cart:\n\t$" + store.getMemberByID(id).shoppingCart.calculateCartTotal());
