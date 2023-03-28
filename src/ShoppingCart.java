@@ -6,7 +6,7 @@ public class ShoppingCart
     private double totalCost;
 
     //ArrayList of what is inside the Shopping Cart
-    public ArrayList<Product> contents = new ArrayList<Product>();
+    public ArrayList<Product> contents = new ArrayList<>();
     
     //Constructor
     public ShoppingCart()

@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 /*
  * @author me
@@ -12,9 +11,9 @@ public class TestHarness
         Scanner sc = new Scanner(System.in);
 
         //Initializes some test Members
-        Member member1 = new Member("Kevin", "Aswani");
+        Member member1 = new Member("Kevin", "Ashwani");
         Member member2 = new PremiumMember("Bob", "Loblaw");
-        Member member3 = new Member("Georgiy", "Smesharik");
+        Member member3 = new Member("Georgiy", "Timeshare");
 
         //Adds test Members into memberList
         store.addMember(member1);
@@ -168,7 +167,7 @@ public class TestHarness
          }
     }
 
-    //Displays the Purhcasing Options
+    //Displays the Purchasing Options
     public static void purchaseOptions(Bookstore store)
     {
         Scanner scan = new Scanner(System.in);
