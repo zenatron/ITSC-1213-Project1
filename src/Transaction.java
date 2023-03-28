@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 
 public class Transaction 
 {
-    private static long id;
+    private long id;
     private long memberId;
     private long productId;
     private PaymentType paymentType;
@@ -13,7 +13,7 @@ public class Transaction
     //Constructor
     public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
     {
-        Transaction.id = id;
+        this.id = hash();
         this.memberId = memberId;
         this.productId = productId;
         this.paymentType = paymentType;
@@ -27,13 +27,20 @@ public class Transaction
         return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " || Payment: " + paymentType +" ||Time: " + timestamp; 
     }
 
+    public long hash()
+    {
+        long result = 17;
+        result = 36 * result + timestamp.hashCode();
+        return result;
+    }
+
     //Generic getters and setters
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
-        Transaction.id = id;
+        this.id = id;
     }
 
     public long getMemberId() {

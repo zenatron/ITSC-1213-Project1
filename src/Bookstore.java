@@ -6,7 +6,7 @@ public class Bookstore implements BookStoreSpecification
     public ArrayList<Member> memberList = new ArrayList<>();
     public ArrayList<Product> inventory = new ArrayList<>();
     public ArrayList<Transaction> transactions = new ArrayList<>();
-    private long transactionCounter;
+    protected long transactionCounter;
     private double monthlyFee;
 
     //Constructor
