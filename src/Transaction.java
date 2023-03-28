@@ -11,9 +11,9 @@ public class Transaction
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     //Constructor
-    public Transaction(long memberId, long productId, PaymentType paymentType, double amount)
+    public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
     {
-        Transaction.id = id++;
+        Transaction.id = id;
         this.memberId = memberId;
         this.productId = productId;
         this.paymentType = paymentType;
@@ -29,11 +29,11 @@ public class Transaction
 
     //Generic getters and setters
     public long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        Transaction.id = id;
     }
 
     public long getMemberId() {
