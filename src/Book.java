@@ -18,6 +18,12 @@ public class Book extends Product
         return result;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Book: " + title + " Author: " + author + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+    }
+
     //Abstract method that allows copying of the object, from the Product class
     @Override
     public Product copy()

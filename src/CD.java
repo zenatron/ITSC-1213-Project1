@@ -27,7 +27,7 @@ public class CD extends Product
     @Override
     public String toString()
     {
-        return "Product: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+        return "CD: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
     //Abstract method that allows copying of the object, from the Product class

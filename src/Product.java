@@ -33,10 +33,7 @@ public abstract class Product implements Comparable
     }
     
     //Prints the product variables
-    public String toString()
-    {
-        return "Product: " + title + " Author: " + author + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
-    }
+    public abstract String toString();
 
     //Getters for all the product variables
     //No setters because they don't change, except for quantity
