@@ -269,6 +269,7 @@ public class TestHarness
                 break;
 
                 case 2:
+                Member buyer = null;
                 System.out.println("< Checking Out >");
 
                 System.out.println("Confirm ID of Buyer");
@@ -282,15 +283,16 @@ public class TestHarness
                 else
                 {
                     System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                    buyer = store.getMemberByID(id);
                 }
 
                 System.out.println("Confirm Items in Cart:");
-                for (Product item : store.getMemberByID(id).shoppingCart.contents)
+                for (Product item : buyer.shoppingCart.contents)
                 {
                     System.out.println(item.getTitle() + " qty: " + item.getQuantity());
                 }
 
-                System.out.println("Total Cost in cart:\n\t$" + store.getMemberByID(id).shoppingCart.calculateCartTotal());
+                System.out.println("Total Cost in cart:\n\t$" + buyer.shoppingCart.calculateCartTotal());
 
                 System.out.println("Enter Payment Type: (feature not implemented)");
                 PaymentType pType = new PaymentType();
@@ -299,19 +301,21 @@ public class TestHarness
                 char ready = scan.nextLine().charAt(0);
                 if(ready == 'Y' || ready == 'y')
                 {
-                    for (Product item : store.getMemberByID(id).shoppingCart.contents)
+                    for (Product item : buyer.shoppingCart.contents)
                     {
-                        if (store.makePurchase(store.getMemberByID(id), item, item.getQuantity(), pType))
+                        if (store.makePurchase(buyer, item, item.getQuantity(), pType))
                         {
                             System.out.println("Successfully purchased " + item.getTitle());
                         }
                         else {System.out.println("---- Something went wrong! ----");}
                     }
                     System.out.println("<< Thank you for shopping at Bookstore! >>");
+                    buyer.shoppingCart.contents.clear();
                 }
                 else
                 {
                     System.out.println("Transaction Cancelled");
+                    buyer.shoppingCart.contents.clear();
                 }
                 break;
 
