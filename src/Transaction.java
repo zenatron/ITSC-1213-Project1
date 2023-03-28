@@ -13,7 +13,7 @@ public class Transaction
     //Constructor
     public Transaction(long memberId, long productId, PaymentType paymentType, double amount)
     {
-        this.id = id++;
+        Transaction.id = id++;
         this.memberId = memberId;
         this.productId = productId;
         this.paymentType = paymentType;

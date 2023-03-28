@@ -156,7 +156,6 @@ public class Bookstore implements BookStoreSpecification
         addIntoInventory(product, qty);
     }
 
-    @Override
     public double inventoryValue()
     {
         double value = 0;

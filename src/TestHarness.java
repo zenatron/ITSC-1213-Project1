@@ -134,7 +134,15 @@ public class TestHarness
                      System.out.println("Enter the ID of the product to edit");
                      long id = sc.nextLong();
                      sc.nextLine();
-                     System.out.println("Enter the qty to restock");
+                     if (store.getProductByID(id) == null)
+                     {
+                         System.out.println("Sorry, this product does not exist in inventory.");
+                         break;
+                     }
+                     else
+                     {
+                         System.out.println("Enter the quantity to restock:");
+                     }
                      int quantity = sc.nextInt();
                      sc.nextLine();
                      store.restockProduct(store.getProductByID(id), quantity);
@@ -154,12 +162,27 @@ public class TestHarness
                      System.out.println("\nEnter the ID of the first product to compare:");
                      long id = sc.nextLong();
                      sc.nextLine();
-                     //TODO add section here that checks that the correct product id is entered
-                     System.out.println(store.getProductByID(id).getTitle());
+                     if (store.getProductByID(id) == null)
+                     {
+                         System.out.println("Sorry, this product does not exist in inventory.");
+                         break;
+                     }
+                     else
+                     {
+                         System.out.println(store.getProductByID(id).getTitle());
+                     }
                      System.out.println("\nEnter the ID of the second product to compare:");
                      long id2 = sc.nextLong();
                      sc.nextLine();
-                     System.out.println(store.getProductByID(id2).getTitle());
+                     if (store.getProductByID(id2) == null)
+                     {
+                         System.out.println("Sorry, this product does not exist in inventory.");
+                         break;
+                     }
+                     else
+                     {
+                         System.out.println(store.getProductByID(id2).getTitle());
+                     }
                      System.out.println("Result:");
                      store.getProductByID(id).compareTo(store.getProductByID(id2));
                  }
@@ -197,13 +220,28 @@ public class TestHarness
                 System.out.println("Enter ID of Buyer");
                 long id = scan.nextLong();
                 scan.nextLine();
-                //TODO Add checking for the correct member id
-                System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                if (store.getMemberByID(id) == null)
+                {
+                    System.out.println("Sorry, this person does not exist in the system.");
+                    break;
+                }
+                else
+                {
+                    System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                }
 
                 System.out.println("Type product ID to add to cart:");
                 long itemToAdd = scan.nextLong();
                 scan.nextLine();
-                System.out.println(store.getProductByID(itemToAdd).getTitle());
+                if (store.getProductByID(itemToAdd) == null)
+                {
+                    System.out.println("Sorry, this product does not exist in inventory.");
+                    break;
+                }
+                else
+                {
+                    System.out.println(store.getProductByID(itemToAdd).getTitle());
+                }
 
                 System.out.println("Enter the quantity to add to cart:");
                 int quantityToBuy = scan.nextInt();
@@ -236,7 +274,15 @@ public class TestHarness
                 System.out.println("Confirm ID of Buyer");
                 id = scan.nextLong();
                 scan.nextLine();
-                System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                if (store.getMemberByID(id) == null)
+                {
+                    System.out.println("Sorry, this person does not exist in the system.");
+                    break;
+                }
+                else
+                {
+                    System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                }
 
                 System.out.println("Confirm Items in Cart:");
                 for (Product item : store.getMemberByID(id).shoppingCart.contents)
