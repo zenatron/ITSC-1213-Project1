@@ -19,6 +19,16 @@ public abstract class Product implements Comparable
     public abstract long hash();
 
     public abstract Product copy();
+
+    public void compareTo(Product other) //Allows comparison of products by cost
+    {
+        if (this.getCost() > other.getCost())
+            System.out.println(this.getTitle() + " costs more");
+        if (this.getCost() < other.getCost())
+            System.out.println(other.getTitle() + " costs more");
+        if (this.getCost() == other.getCost())
+            System.out.println(this.getTitle() + " and " + other.getTitle() + " have the same cost");
+    }
     
     //Prints the product variables
     public String toString()

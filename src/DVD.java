@@ -38,15 +38,4 @@ public class DVD extends Product
         newDVD.setQuantity(quantity);
         return newDVD;
     }
-
-    @Override
-    public void compareTo(Product other)
-    {
-        if (this.getCost() > other.getCost())
-            System.out.println(this.getTitle() + " costs more");
-        if (this.getCost() < other.getCost())
-            System.out.println(other.getTitle() + " costs more");
-        if (this.getCost() == other.getCost())
-            System.out.println(this.getTitle() + " and " + other.getTitle() + " have the same cost");
-    }
 }

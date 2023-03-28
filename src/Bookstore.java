@@ -7,11 +7,13 @@ public class Bookstore implements BookStoreSpecification
     public ArrayList<Product> inventory = new ArrayList<>();
     public ArrayList<Transaction> transactions = new ArrayList<>();
     private long transactionCounter;
+    private double monthlyFee;
 
     //Constructor
     public Bookstore()
     {
         transactionCounter = 0;
+        monthlyFee = 10.0;
     }
 
     //Adds a Transaction into the transactions ArrayList
@@ -69,7 +71,6 @@ public class Bookstore implements BookStoreSpecification
         {
             memberList.add(member);
         }
-        return;
     }
     
     //Inventory management methods
@@ -164,5 +165,15 @@ public class Bookstore implements BookStoreSpecification
             value += product.getQuantity() * product.getCost();
         }
         return value;
+    }
+
+    public double getMonthlyFee()
+    {
+        return monthlyFee;
+    }
+
+    public void setMonthlyFee(double monthlyFee)
+    {
+        this.monthlyFee = monthlyFee;
     }
 }
