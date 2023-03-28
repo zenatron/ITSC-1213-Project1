@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class ShoppingCart 
 {
-    private int itemsInCart;
     private double totalCost;
 
     //ArrayList of what is inside the Shopping Cart
@@ -11,7 +10,6 @@ public class ShoppingCart
     //Constructor
     public ShoppingCart()
     {
-        this.itemsInCart = 0;
         this.totalCost = 0.0;
     }
 
@@ -73,15 +71,6 @@ public class ShoppingCart
             total += (item.quantity);
         }
         return total;
-    }
-
-    //Generic getters and setters
-    public int getItemsInCart() {
-        return this.itemsInCart;
-    }
-
-    public void setItemsInCart(int itemsInCart) {
-        this.itemsInCart = itemsInCart;
     }
 
     public double getTotalCost() {

@@ -154,6 +154,7 @@ public class TestHarness
                      System.out.println("\nEnter the ID of the first product to compare:");
                      long id = sc.nextLong();
                      sc.nextLine();
+                     //TODO add section here that checks that the correct product id is entered
                      System.out.println(store.getProductByID(id).getTitle());
                      System.out.println("\nEnter the ID of the second product to compare:");
                      long id2 = sc.nextLong();
@@ -196,6 +197,7 @@ public class TestHarness
                 System.out.println("Enter ID of Buyer");
                 long id = scan.nextLong();
                 scan.nextLine();
+                //TODO Add checking for the correct member id
                 System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
 
                 System.out.println("Type product ID to add to cart:");

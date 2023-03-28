@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 
 public class Transaction 
 {
-    private long id;
+    private static long id;
     private long memberId;
     private long productId;
     private PaymentType paymentType;
@@ -11,9 +11,9 @@ public class Transaction
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     //Constructor
-    public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
+    public Transaction(long memberId, long productId, PaymentType paymentType, double amount)
     {
-        this.id = id;
+        this.id = id++;
         this.memberId = memberId;
         this.productId = productId;
         this.paymentType = paymentType;

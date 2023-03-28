@@ -15,6 +15,6 @@ public class PremiumMember extends Member
     @Override
     public String toString()
     {
-        return "PREMIUM Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Total Spent: $" + totalSpent;
+        return "PREMIUM " + super.toString();
     }
 }

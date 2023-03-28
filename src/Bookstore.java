@@ -21,7 +21,7 @@ public class Bookstore implements BookStoreSpecification
     {
         //Increments transaction counter, instantiates a new Transaction, and adds it to the transactions ArrayList
         transactionCounter++;
-        Transaction t = new Transaction(productId, memberId, productId, paymentType, amount);
+        Transaction t = new Transaction(memberId, productId, paymentType, amount);
         transactions.add(t);
     }
 

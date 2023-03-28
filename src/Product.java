@@ -22,11 +22,13 @@ public abstract class Product implements Comparable
 
     public void compareTo(Product other) //Allows comparison of products by cost
     {
-        if (this.getCost() > other.getCost())
+        double difference = this.getCost() - other.getCost();
+
+        if (difference > 0)
             System.out.println(this.getTitle() + " costs more: $" + this.getCost());
-        if (this.getCost() < other.getCost())
+        else if (difference < 0)
             System.out.println(other.getTitle() + " costs more: $" + other.getCost());
-        if (this.getCost() == other.getCost())
+        else
             System.out.println(this.getTitle() + " and " + other.getTitle() + " have the same cost: $" + this.getCost());
     }
     
