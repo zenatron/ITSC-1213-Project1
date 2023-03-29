@@ -29,8 +29,11 @@ public class Transaction
 
     public long hash()
     {
-        long result = 17;
-        result = 36 * result + timestamp.hashCode();
+        long random = (long) (Math.random() * Math.random() * 17);
+        long result = random;
+        result = 36 * result + String.valueOf(amount + random).hashCode();
+        result = 36 * result + (timestamp + random).hashCode();
+        result = 36 * result + String.valueOf(productId + random).hashCode();
         return result;
     }
 

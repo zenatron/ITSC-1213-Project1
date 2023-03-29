@@ -42,10 +42,10 @@ public class TestHarness
         System.out.println(member2);
         System.out.println(member3);
 
-        // //Makes some test purchases
-        // store.makePurchase(member1, book1, 10, new PaymentType());
-        // store.makePurchase(member2, cd1, 10, new PaymentType());
-        // store.makePurchase(member3, book1, 10, new PaymentType());
+         //Makes some test purchases
+         store.makePurchase(member1, book1, 10, new PaymentType());
+         store.makePurchase(member2, cd1, 10, new PaymentType());
+         store.makePurchase(member3, book1, 10, new PaymentType());
 
          while (true)
          {
