@@ -33,6 +33,7 @@ public class MemberUpdater {
 
             printWriter.println(toCSV(memberList));
 
+            printWriter.flush();
             printWriter.close();
 
         } catch (IOException e) {

@@ -37,6 +37,7 @@ public class InventoryUpdater {
 
             printWriter.println(toCSV(inventory));
 
+            printWriter.flush();
             printWriter.close();
 
         } catch (IOException e) {

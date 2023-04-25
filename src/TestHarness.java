@@ -12,21 +12,7 @@ public class TestHarness {
         Bookstore store = new Bookstore();
         Scanner sc = new Scanner(System.in);
 
-        //Initializes some test Members
-        Member member1 = new Member("Kevin", "Ashwani");
-        Member member2 = new PremiumMember("Bob", "Loblaw");
-        Member member3 = new Member("Georgiy", "Timeshare");
-
-        //Adds test Members into memberList
-        store.addMember(member1);
-        store.addMember(member2);
-        store.addMember(member3);
-
-        //Prints out the size of the inventory and all test Members
         System.out.println(store.inventory.size());
-        System.out.println(member1);
-        System.out.println(member2);
-        System.out.println(member3);
 
         // ________________________________________________________
         //DEBUG LINES
@@ -107,18 +93,6 @@ public class TestHarness {
             System.err.println("Error reading file: " + e.getMessage());
         }
 
-
-
-
-
-
-
-
-        //Prints out the size of the inventory and all test Members
-        System.out.println(store.inventory.size());
-        System.out.println(member1);
-        System.out.println(member2);
-        System.out.println(member3);
 
 //         //Makes some test purchases to test Transactions
 //         store.makePurchase(member1, book1, 10, new PaymentType());

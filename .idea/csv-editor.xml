@@ -31,6 +31,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/src/files/inventory-20230425-173111.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/files/inventory-20230425-173455.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/files/inventory-20230425-173812.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/src/files/inventory-20230425-173953.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/src/files/inventory-20230425165934.csv">
           <value>
             <Attribute>
