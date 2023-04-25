@@ -21,7 +21,7 @@ public class MemberUpdater {
         return content;
     }
 
-    public static void saveInventory(ArrayList<Member> memberList) {
+    public static void saveMembers(ArrayList<Member> memberList) {
         String newFilename = "members.csv";
 
         try {

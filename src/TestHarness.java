@@ -240,6 +240,8 @@ public class TestHarness {
 
                     InventoryUpdater.saveInventory(store.inventory);
 
+                    MemberUpdater.saveMembers(store.memberList);
+
                     System.exit(0);
                 }
             }
