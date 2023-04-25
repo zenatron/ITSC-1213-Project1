@@ -1,14 +1,14 @@
 public class DVD extends Product 
 {
-    private String studio;
+    private String album;
     //DVDs are for video formats
     //Includes studio field
 
     //Constructor
-    public DVD(String title, String author, String studio, double cost) 
+    public DVD(String title, String author, String album, double cost) 
     {
         super(title, author, cost);
-        this.studio = studio;
+        this.album = album;
         this.id = hash();
     }
 
@@ -19,7 +19,7 @@ public class DVD extends Product
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();
-        result = 37 * result + studio.hashCode();
+        result = 37 * result + album.hashCode();
         return result;
     }
 
@@ -27,13 +27,13 @@ public class DVD extends Product
     @Override
     public String toString()
     {
-        return "Product: " + title + " || Author: " + author + " || Studio: " + studio + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
+        return "Product: " + title + " || Author: " + author + " || Album: " + album + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
     }
 
     //Abstract method that allows copying of the object, from the Product class
     public Product copy()
     {
-        DVD newDVD = new DVD(title, author, studio, cost);
+        DVD newDVD = new DVD(title, author, album, cost);
         newDVD.setQuantity(quantity);
         return newDVD;
     }        

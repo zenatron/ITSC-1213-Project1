@@ -21,8 +21,8 @@ public class TestHarness
         store.addMember(member3);
 
         //Initializes some test Products
-        Book book1 = new Book("Fahrenheit 451","Ray Bradbury", 19.99);
-        Book book2 = new Book("1984", "George Orwell", 69.99);
+        Book book1 = new Book("Fahrenheit 451","Ray Bradbury", "Dystopia", 19.99);
+        Book book2 = new Book("1984", "George Orwell", "Dystopia", 69.99);
         CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
         CD cd2 = new CD("Deer Sounds", "Jim Stuart", "Animal Noises", 134.79);
         DVD dvd1 = new DVD("Shrek 5", "Sharik", "Pixar", 20.99);
@@ -149,19 +149,21 @@ public class TestHarness
 
                 if ("book".equalsIgnoreCase(type))
                 {
-                    store.addIntoInventory(new Book(title, author, newProductCost), units);
+                    System.out.println("What is the album for the Book?");
+                    String albumBook = sc.nextLine();
+                    store.addIntoInventory(new Book(title, author, albumBook, newProductCost), units);
                 }
                 else if ("cd".equalsIgnoreCase(type))
                 {
                     System.out.println("What is the album for the CD?");
-                    String album = sc.nextLine();
-                    store.addIntoInventory(new CD(title, author, album, newProductCost), units);
+                    String albumCd = sc.nextLine();
+                    store.addIntoInventory(new CD(title, author, albumCd, newProductCost), units);
                 }
                 else if ("dvd".equalsIgnoreCase(type))
                 {
-                    System.out.println("What is the studio for the DVD?");
-                    String studio = sc.nextLine();
-                    store.addIntoInventory(new DVD(title, author, studio, newProductCost), units);
+                    System.out.println("What is the album for the DVD?");
+                    String albumDvd = sc.nextLine();
+                    store.addIntoInventory(new DVD(title, author, albumDvd, newProductCost), units);
                 }
                 break;
 
@@ -193,6 +195,7 @@ public class TestHarness
 
                 case 8:
                 System.exit(0);
+                sc.close();
                 break;
             }
          }
@@ -286,6 +289,7 @@ public class TestHarness
 
                 case 3:
                 System.out.println("< Exiting... >");
+                scan.close();
                 return;
             }
         }
