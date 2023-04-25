@@ -22,7 +22,7 @@ public class Book extends Product
         result = 37 * result + album.hashCode();
         return result;
     }
-
+    
     //Prints the book
     @Override
     public String toString()
@@ -31,6 +31,7 @@ public class Book extends Product
     }
 
     //Abstract method that allows copying of the object, from the Product class
+    @Override
     public Product copy()
     {
         Book newBook = new Book(title, author, album, cost);

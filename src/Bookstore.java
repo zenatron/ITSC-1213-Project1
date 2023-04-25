@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 
-public class Bookstore 
+public class Bookstore implements BookStoreSpecification
 {
     //ArrayLists for the Members, Products, and Transactions
-    public ArrayList<Member> memberList = new ArrayList<Member>();
-    public ArrayList<Product> inventory = new ArrayList<Product>();
-    public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-    private long transactionCounter;
+    public ArrayList<Member> memberList = new ArrayList<>();
+    public ArrayList<Product> inventory = new ArrayList<>();
+    public ArrayList<Transaction> transactions = new ArrayList<>();
+    protected long transactionCounter;
+    private double monthlyFee;
 
     //Constructor
     public Bookstore()
     {
         transactionCounter = 0;
+        monthlyFee = 10.0;
     }
 
     //Adds a Transaction into the transactions ArrayList
@@ -19,7 +21,7 @@ public class Bookstore
     {
         //Increments transaction counter, instantiates a new Transaction, and adds it to the transactions ArrayList
         transactionCounter++;
-        Transaction t = new Transaction(productId, memberId, productId, paymentType, amount);
+        Transaction t = new Transaction(transactionCounter, memberId, productId, paymentType, amount);
         transactions.add(t);
     }
 
@@ -69,7 +71,6 @@ public class Bookstore
         {
             memberList.add(member);
         }
-        return;
     }
     
     //Inventory management methods
@@ -89,7 +90,7 @@ public class Bookstore
     }
 
     //Adds products into inventory
-    public void addIntoInventory(Product product, int qty) 
+    public void addIntoInventory(Product product, int qty)
     {
         Product p = getProductByID(product.getId());
         //Checks if the product already exists
@@ -97,12 +98,12 @@ public class Bookstore
         {
             product.setQuantity(qty);
             inventory.add(product);
-            System.out.println("Added: " + product);
+            System.out.println("Added New: " + product);
         }
-        else 
+        else
         {
             p.setQuantity(p.getQuantity() + qty);
-            System.out.println("NOT Added: " + product);
+            System.out.println("Product Adjusted: " + product);
         }
     }
 
@@ -118,8 +119,8 @@ public class Bookstore
     //Core to the Bookstore's functionality
     public boolean makePurchase(Member member, Product product, int requestedQty, PaymentType paymentType)
     {
-        addMember(member); //Member will be added into system if doesn't exist in system
-        if (checkInStock(product, requestedQty) == false) //Checks if requestedQty is in stock
+        addMember(member); //Member will be added into system if it doesn't exist in system
+        if (!checkInStock(product, requestedQty)) //Checks if requestedQty is in stock
         {
             return false;
         }
@@ -132,14 +133,46 @@ public class Bookstore
         return true;
     }
 
-    //These methods are not used, but may provide additional functionality
-    public void collectMonthlyFee()
+    //Run this method every month
+    public void collectMonthlyFee(double fee)
     {
-        //Stub method
+        for (Member member : memberList)
+        {
+            if (member instanceof PremiumMember)
+            {
+                ((PremiumMember) member).payFees(fee);
+            }
+        }
     }
 
     public long getLifetimeTransactions()
     {
         return transactionCounter;
+    }
+
+    @Override
+    public void restockProduct(Product product, int qty)
+    {
+        addIntoInventory(product, qty);
+    }
+
+    public double inventoryValue()
+    {
+        double value = 0;
+        for (Product product : inventory)
+        {
+            value += product.getQuantity() * product.getCost();
+        }
+        return value;
+    }
+
+    public double getMonthlyFee()
+    {
+        return monthlyFee;
+    }
+
+    public void setMonthlyFee(double monthlyFee)
+    {
+        this.monthlyFee = monthlyFee;
     }
 }

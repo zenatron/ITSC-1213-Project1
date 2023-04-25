@@ -2,23 +2,21 @@ import java.util.ArrayList;
 
 public class ShoppingCart 
 {
-    private int itemsInCart;
     private double totalCost;
 
     //ArrayList of what is inside the Shopping Cart
-    public ArrayList<Product> contents = new ArrayList<Product>();
+    public ArrayList<Product> contents = new ArrayList<>();
     
     //Constructor
     public ShoppingCart()
     {
-        this.itemsInCart = 0;
         this.totalCost = 0.0;
     }
 
     //Allows printing of the Shopping Cart
     public String toString()
     {
-        return "Cart contains: " + calculateItemsInCart(contents) + " items, totaling: $" + calculateCartTotal(contents);
+        return "Cart contains: " + calculateItemsInCart(contents) + " items, totaling: $" + calculateCartTotal();
     }
 
     //Adds into the contents of the Shopping Cart
@@ -54,7 +52,7 @@ public class ShoppingCart
     }
 
     //Returns the total cost of everything in the cart
-    public double calculateCartTotal(ArrayList<Product> contents)
+    public double calculateCartTotal()
     {
         double total = 0;
         for (Product item : contents)
@@ -73,15 +71,6 @@ public class ShoppingCart
             total += (item.quantity);
         }
         return total;
-    }
-
-    //Generic getters and setters
-    public int getItemsInCart() {
-        return this.itemsInCart;
-    }
-
-    public void setItemsInCart(int itemsInCart) {
-        this.itemsInCart = itemsInCart;
     }
 
     public double getTotalCost() {
