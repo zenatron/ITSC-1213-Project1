@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class InventoryUpdater {
+public class InventorySaver {
 
     public static void saveInventory(ArrayList<Product> inventory) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");

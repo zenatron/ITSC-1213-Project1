@@ -1,11 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class MemberUpdater {
+public class MemberSaver {
 
     public static void saveMembers(ArrayList<Member> memberList) {
         String newFilename = "members.csv";

@@ -12,16 +12,6 @@ public class TestHarness {
         Bookstore store = new Bookstore();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(store.inventory.size());
-
-        // ________________________________________________________
-        //DEBUG LINES
-        // //Makes some test purchases
-        // store.makePurchase(member1, book1, 10, new PaymentType());
-        // store.makePurchase(member2, cd1, 10, new PaymentType());
-        // store.makePurchase(member3, book1, 10, new PaymentType());
-        //__________________________________________________________
-
         try {
             String startFilePath = "./src/files/start.csv";
             BufferedReader reader = new BufferedReader(new FileReader(startFilePath));
@@ -94,11 +84,7 @@ public class TestHarness {
         }
 
 
-//         //Makes some test purchases to test Transactions
-//         store.makePurchase(member1, book1, 10, new PaymentType());
-//         store.makePurchase(member2, cd1, 10, new PaymentType());
-//         store.makePurchase(member3, book1, 10, new PaymentType());
-
+        System.out.println(store.inventory.size());
         ArrayList<Member> membersAddedToday = new ArrayList<>();
         while (true) {
             //Check what the user wants to do
@@ -249,9 +235,9 @@ public class TestHarness {
 
                     ReportGenerator.generateReport(report);
 
-                    InventoryUpdater.saveInventory(store.inventory);
+                    InventorySaver.saveInventory(store.inventory);
 
-                    MemberUpdater.saveMembers(store.memberList);
+                    MemberSaver.saveMembers(store.memberList);
 
                     System.exit(0);
                 }
