@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 /*
  * @author me
@@ -20,28 +23,29 @@ public class TestHarness
         store.addMember(member2);
         store.addMember(member3);
 
-        //Initializes some test Products
-        Book book1 = new Book("Fahrenheit 451","Ray Bradbury", "Dystopia", 19.99);
-        Book book2 = new Book("1984", "George Orwell", "Dystopia", 69.99);
-        CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
-        CD cd2 = new CD("Deer Sounds", "Jim Stuart", "Animal Noises", 134.79);
-        DVD dvd1 = new DVD("Shrek 5", "Sharik", "Pixar", 20.99);
-        DVD dvd2 = new DVD("Meshok Yablok", "Yuri Frankovich", "Mosfilm", 0.01);
+        // //Initializes some test Products
+        // Book book1 = new Book("Fahrenheit 451","Ray Bradbury", "Dystopia", 19.99);
+        // Book book2 = new Book("1984", "George Orwell", "Dystopia", 69.99);
+        // CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
+        // CD cd2 = new CD("Deer Sounds", "Jim Stuart", "Animal Noises", 134.79);
+        // DVD dvd1 = new DVD("Shrek 5", "Sharik", "Pixar", 20.99);
+        // DVD dvd2 = new DVD("Meshok Yablok", "Yuri Frankovich", "Mosfilm", 0.01);
 
-        //Adds 100 of each product into inventory
-        store.addIntoInventory(book1, 100);
-        store.addIntoInventory(book2, 100);
-        store.addIntoInventory(cd1, 100);
-        store.addIntoInventory(cd2, 100);
-        store.addIntoInventory(dvd1, 100);
-        store.addIntoInventory(dvd2, 100);
+        // //Adds 100 of each product into inventory
+        // store.addIntoInventory(book1, 100);
+        // store.addIntoInventory(book2, 100);
+        // store.addIntoInventory(cd1, 100);
+        // store.addIntoInventory(cd2, 100);
+        // store.addIntoInventory(dvd1, 100);
+        // store.addIntoInventory(dvd2, 100);
         
-        //Prints out the size of the inventory and all test Members
-        System.out.println(store.inventory.size());
-        System.out.println(member1.toString());
-        System.out.println(member2.toString());
-        System.out.println(member3.toString());
+        // //Prints out the size of the inventory and all test Members
+        // System.out.println(store.inventory.size());
+        // System.out.println(member1.toString());
+        // System.out.println(member2.toString());
+        // System.out.println(member3.toString());
 
+        // ________________________________________________________
         // //Makes some test purchases
         // store.makePurchase(member1, book1, 10, new PaymentType());
         // store.makePurchase(member2, cd1, 10, new PaymentType());
@@ -61,16 +65,46 @@ public class TestHarness
         // System.out.println(store.transactions.get(1).toString());
         // System.out.println(store.transactions.get(2).toString());
 
-        /* 
-         * Stuff we want the user to do through the console:
-         * 
-         *      Register a new member
-         *      Make a purchase
-         *      Look through the transaction list
-         *      Add a new product
-         *      Update manually stock of existing products
-         *      Check how much is left in stock of products
-         */
+
+        //TODO: Remove the goddamn spaces in the CSV file
+        try {
+            String filePath = "./src/start.csv";
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            
+            //Skip the first line
+            String line = reader.readLine();
+            while ((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+                int number = Integer.parseInt(data[0]);
+                String type = data[1];
+                String title = data[2];
+                String author = data[3];
+                String album = data[4];
+
+                double cost = Double.parseDouble(data[5]);
+                int qty = Integer.parseInt(data[6]);
+
+                if (type.equalsIgnoreCase("book")) {
+                    Book book = new Book(title, author, album, cost);
+                    book.setQuantity(qty);
+                    store.inventory.add(book);
+                } else if (type.equalsIgnoreCase("dvd")) {
+                    DVD dvd = new DVD(title, author, album, cost);
+                    dvd.setQuantity(qty);
+                    store.inventory.add(dvd);
+                } else if (type.equalsIgnoreCase("cd")) {
+                    CD cd = new CD(title, author, album, cost);
+                    cd.setQuantity(qty);
+                    store.inventory.add(cd);
+                } else System.out.println("Incorrect type");
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+
 
          while (true)
          {
