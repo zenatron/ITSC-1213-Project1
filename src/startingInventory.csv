@@ -1,1 +1,7 @@
-Number:int, Type:String, Title:String, Author:String, Album:String, Cost:double,
+Number:int, Type:String, Title:String, Author:String, Album:String, Cost:double, Qty:int,
+1, Fahrenheit 451, Ray Bradbury, Dystopia, 19.99, 100,
+2, 1984, George Orwell, Dystopia, 69.99, 100,
+3, Turkish National Anthem, Nursultan Tuleakbav, Turkiye, 1.49, 100,
+4, Deer Sounds, Jim Stuart, Animal Noises, 134.79, 100,
+5, Shrek 5, Sharik, Pixar, 20.99, 100,
+6, Meshok Yablok, Yuri Frankovich, Mosfilm, 0.01, 100,
