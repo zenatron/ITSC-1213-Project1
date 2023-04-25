@@ -38,6 +38,7 @@ public class InventoryUpdater {
             printWriter.println(toCSV(inventory));
 
             printWriter.close();
+
         } catch (IOException e) {
             System.out.println("Error saving file: " + e.getMessage());
         }
