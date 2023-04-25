@@ -58,6 +58,11 @@ public class Member
         return totalSpent;
     }
 
+    public void setTotalSpent(double dollars)
+    {
+        this.totalSpent = dollars;
+    }
+
     public void addToTotalSpent(double dollars) 
     {
         this.totalSpent += dollars;

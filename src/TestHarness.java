@@ -69,10 +69,12 @@ public class TestHarness {
 
                 if (isPremium.equalsIgnoreCase("false")) {
                     Member member = new Member(first, last);
+                    member.setTotalSpent(totalSpent);
                     store.memberList.add(member);
 
                 } else if (isPremium.equalsIgnoreCase("true")) {
                     PremiumMember premiumMember = new PremiumMember(first, last);
+                    premiumMember.setTotalSpent(totalSpent);
                     store.memberList.add(premiumMember);
 
                 } else System.out.println("Incorrect type in file: " + membersFilePath);
