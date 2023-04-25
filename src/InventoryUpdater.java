@@ -8,7 +8,7 @@ import java.util.Date;
 public class InventoryUpdater {
     private String filename;
 
-    public void toCSV(ArrayList<Product> inventory)
+    public String toCSV(ArrayList<Product> inventory)
     {
         String content = "";
         for (Product product : inventory)
@@ -17,10 +17,13 @@ public class InventoryUpdater {
             content += product.getTitle() + ",";
             content += product.getAuthor() + ",";
             content += product.getAlbum() + ",";
+            content += product.getCost() + ",";
+            content += product.getQuantity() + "\n";
         }
+        return content;
     }
 
-    public void saveInventory() {
+    public void saveInventory(ArrayList<Product> inventory) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
         String timestamp = sdf.format(date);
@@ -33,7 +36,7 @@ public class InventoryUpdater {
             // Writes the header text
             printWriter.println("Type,Title,Author,Album,Cost,Qty");
 
-            //TODO: write the content string from toCSV
+            printWriter.println(toCSV(inventory));
 
             printWriter.close();
         } catch (IOException e) {

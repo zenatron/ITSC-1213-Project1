@@ -18,7 +18,6 @@ public class DVD extends Product
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();
-        result = 37 * result + album.hashCode();
         return result;
     }
 

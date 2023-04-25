@@ -1,6 +1,6 @@
 public class Book extends Product 
 {
-    private String album;
+    protected String album;
     //Books are books
     //Includes album information
 
@@ -18,7 +18,6 @@ public class Book extends Product
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();
-        result = 37 * result + album.hashCode();
         return result;
     }
 
