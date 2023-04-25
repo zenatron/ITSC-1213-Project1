@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 /*
  * @author me
@@ -44,14 +45,13 @@ public class TestHarness {
             while ((line = reader.readLine()) != null) {
 
                 String[] data = line.split(",");
-                int number = Integer.parseInt(data[0]);
-                String type = data[1];
-                String title = data[2];
-                String author = data[3];
-                String album = data[4];
+                String type = data[0];
+                String title = data[1];
+                String author = data[2];
+                String album = data[3];
 
-                double cost = Double.parseDouble(data[5]);
-                int qty = Integer.parseInt(data[6]);
+                double cost = Double.parseDouble(data[4]);
+                int qty = Integer.parseInt(data[5]);
 
                 if (type.equalsIgnoreCase("book")) {
                     Book book = new Book(title, author, album, cost);
@@ -88,6 +88,7 @@ public class TestHarness {
 //         store.makePurchase(member2, cd1, 10, new PaymentType());
 //         store.makePurchase(member3, book1, 10, new PaymentType());
 
+        ArrayList<Member> membersAddedToday = new ArrayList<>();
         while (true) {
             //Check what the user wants to do
             System.out.println("\nSelect an option by typing a number:");
@@ -123,6 +124,7 @@ public class TestHarness {
                     store.addMember(newMember);
                     System.out.println("New Member Registered with Credentials:");
                     System.out.println(newMember);
+                    membersAddedToday.add(newMember);
                 }
                 case 2 -> {
                     System.out.println("<<< Viewing Member List >>>");
@@ -213,8 +215,28 @@ public class TestHarness {
                     store.getProductByID(id).compareTo(store.getProductByID(id2));
                 }
                 case 9 -> {
-                    String report = "Daily Report: ";
-                    //ReportGenerator.generateReport(report);
+                    String report = "Daily Report:";
+                    double dayRevenue = 0.0;
+                    for(Transaction transaction : store.transactions)
+                    {
+                        report += "\nTransaction Added: " + transaction;
+                        dayRevenue += transaction.getAmount();
+                    }
+                    report += "\nTotal Revenue Today: $" + dayRevenue;
+
+                    if (membersAddedToday.isEmpty())
+                    {
+                        report += "\nNo new members added today.";
+                    }
+                    else
+                    {
+                        for(Member member : membersAddedToday)
+                        {
+                            report += "\nMember Added: " + member;
+                        }
+                    }
+
+                    ReportGenerator.generateReport(report);
                     //TODO: create end of day report, what products purchased, what members registered, total revenue
                     //TODO: create new updated inventory file based on existing stock
                     System.exit(0);
@@ -330,7 +352,6 @@ public class TestHarness {
 
                 case 3:
                     System.out.println("< Exiting... >");
-                    scan.close();
                     return;
             }
         }
