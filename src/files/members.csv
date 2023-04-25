@@ -1,4 +1,4 @@
-First,Last,ID,TotalSpent,Premium,
-Kevin,Ashwani,,0.0,false,
-Bob,Loblaw,,0.0,true,
-Georgiy,Timeshare,,0.0,false,
+First,Last,ID,TotalSpent,Premium
+Kevin,Ashwani,,0.0,false
+Bob,Loblaw,,0.0,true
+Georgiy,Timeshare,,0.0,false

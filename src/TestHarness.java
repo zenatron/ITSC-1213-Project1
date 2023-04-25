@@ -240,7 +240,6 @@ public class TestHarness {
 
                     InventoryUpdater.saveInventory(store.inventory);
 
-                    //TODO: create new updated inventory file based on existing stock
                     System.exit(0);
                 }
             }
