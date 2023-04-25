@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 /*
  * @author me
@@ -20,21 +23,89 @@ public class TestHarness
         store.addMember(member2);
         store.addMember(member3);
 
-        //Initializes some test Products
-        Book book1 = new Book("Fahrenheit 451","Ray Bradbury", 19.99);
-        Book book2 = new Book("1984", "George Orwell", 69.99);
-        CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
-        CD cd2 = new CD("Deer Sounds", "Jim Stuart", "Animal Noises", 134.79);
-        DVD dvd1 = new DVD("Shrek 5", "Sharik", "Pixar", 20.99);
-        DVD dvd2 = new DVD("Meshok Yablok", "Yuri Frankovich", "Mosfilm", 0.01);
+        // //Initializes some test Products
+        // Book book1 = new Book("Fahrenheit 451","Ray Bradbury", "Dystopia", 19.99);
+        // Book book2 = new Book("1984", "George Orwell", "Dystopia", 69.99);
+        // CD cd1 = new CD("Turkish National Anthem", "Nursultan Tuleakbav", "Turkiye", 1.49);
+        // CD cd2 = new CD("Deer Sounds", "Jim Stuart", "Animal Noises", 134.79);
+        // DVD dvd1 = new DVD("Shrek 5", "Sharik", "Pixar", 20.99);
+        // DVD dvd2 = new DVD("Meshok Yablok", "Yuri Frankovich", "Mosfilm", 0.01);
 
-        //Adds 100 of each product into inventory
-        store.addIntoInventory(book1, 100);
-        store.addIntoInventory(book2, 100);
-        store.addIntoInventory(cd1, 100);
-        store.addIntoInventory(cd2, 100);
-        store.addIntoInventory(dvd1, 100);
-        store.addIntoInventory(dvd2, 100);
+        // //Adds 100 of each product into inventory
+        // store.addIntoInventory(book1, 100);
+        // store.addIntoInventory(book2, 100);
+        // store.addIntoInventory(cd1, 100);
+        // store.addIntoInventory(cd2, 100);
+        // store.addIntoInventory(dvd1, 100);
+        // store.addIntoInventory(dvd2, 100);
+        
+
+        // //Prints out the size of the inventory and all test Members
+        // System.out.println(store.inventory.size());
+        // System.out.println(member1.toString());
+        // System.out.println(member2.toString());
+        // System.out.println(member3.toString());
+
+        // ________________________________________________________
+        // //Makes some test purchases
+        // store.makePurchase(member1, book1, 10, new PaymentType());
+        // store.makePurchase(member2, cd1, 10, new PaymentType());
+        // store.makePurchase(member3, book1, 10, new PaymentType());
+
+        // //Prints the Members again
+        // System.out.println(member1.toString());
+        // System.out.println(member2.toString());
+        // System.out.println(member3.toString());
+
+        // //Prints the quantities of products
+        // System.out.println(book1.getQuantity());
+        // System.out.println(cd1.getQuantity());
+        // System.out.println(book2.getQuantity());
+
+        // System.out.println(store.transactions.get(0).toString());
+        // System.out.println(store.transactions.get(1).toString());
+        // System.out.println(store.transactions.get(2).toString());
+
+
+        //TODO: Remove the goddamn spaces in the CSV file
+        try {
+            String filePath = "./src/start.csv";
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            
+            //Skip the first line
+            String line = reader.readLine();
+            while ((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+                int number = Integer.parseInt(data[0]);
+                String type = data[1];
+                String title = data[2];
+                String author = data[3];
+                String album = data[4];
+
+                double cost = Double.parseDouble(data[5]);
+                int qty = Integer.parseInt(data[6]);
+
+                if (type.equalsIgnoreCase("book")) {
+                    Book book = new Book(title, author, album, cost);
+                    book.setQuantity(qty);
+                    store.inventory.add(book);
+                } else if (type.equalsIgnoreCase("dvd")) {
+                    DVD dvd = new DVD(title, author, album, cost);
+                    dvd.setQuantity(qty);
+                    store.inventory.add(dvd);
+                } else if (type.equalsIgnoreCase("cd")) {
+                    CD cd = new CD(title, author, album, cost);
+                    cd.setQuantity(qty);
+                    store.inventory.add(cd);
+                } else System.out.println("Incorrect type");
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+        
         
         //Prints out the size of the inventory and all test Members
         System.out.println(store.inventory.size());
@@ -64,6 +135,116 @@ public class TestHarness
             int num = sc.nextInt();
             sc.nextLine();
 
+            switch (num)
+            {
+                case 1:
+                System.out.println("<<< Registering New Member >>>");
+                System.out.println("Enter First Name:");
+                String firstName = sc.nextLine();
+                System.out.println("Enter Last Name:");
+                String lastName = sc.nextLine();
+                System.out.println("Premium Member? (Y/N)");
+                char letter = sc.next().charAt(0);
+                boolean premium = false;
+                if (letter == 'Y' || letter == 'y')
+                {
+                    premium = true;
+                }
+                Member newMember = new Member(firstName, lastName, premium);
+                store.addMember(newMember);
+
+                System.out.println("New Member Registered with Credentials:");
+                System.out.println(newMember);
+                break;
+
+                case 2:
+                System.out.println("<<< Viewing Member List >>>");
+                for (Member member : store.memberList)
+                {
+                    System.out.println(member);
+                }
+                break;
+
+                case 3:
+                System.out.println("<<< Making a Purchase >>>");
+                purchaseOptions(store);
+                break;
+
+                case 4:
+                System.out.println("<<< Viewing Transaction List >>>");
+                for (Transaction transaction : store.transactions)
+                {
+                    System.out.println(transaction);
+                }
+                break;
+
+                case 5:
+                System.out.println("<<< Adding a New Product >>>");
+                System.out.println("Enter the title of the product");
+                String title = sc.nextLine();
+                System.out.println("Enter the author of the product");
+                String author = sc.nextLine();
+                System.out.println("Enter the cost of the product");
+                double newProductCost = sc.nextDouble();
+                sc.nextLine();
+                System.out.println("What kind of product is it? (CD/DVD/Book)");
+                String type = sc.nextLine();
+                System.out.println("Enter many units to add");
+                int units = sc.nextInt();
+                sc.nextLine();
+
+                if ("book".equalsIgnoreCase(type))
+                {
+                    System.out.println("What is the album for the Book?");
+                    String albumBook = sc.nextLine();
+                    store.addIntoInventory(new Book(title, author, albumBook, newProductCost), units);
+                }
+                else if ("cd".equalsIgnoreCase(type))
+                {
+                    System.out.println("What is the album for the CD?");
+                    String albumCd = sc.nextLine();
+                    store.addIntoInventory(new CD(title, author, albumCd, newProductCost), units);
+                }
+                else if ("dvd".equalsIgnoreCase(type))
+                {
+                    System.out.println("What is the album for the DVD?");
+                    String albumDvd = sc.nextLine();
+                    store.addIntoInventory(new DVD(title, author, albumDvd, newProductCost), units);
+                }
+                break;
+
+                case 6:
+                System.out.println("<<< Adding into Inventory >>>");
+                System.out.println("Enter the ID of the product to edit");
+                long id = sc.nextLong();
+                sc.nextLine();
+                System.out.println("Enter the new quantity");
+                int quantity = sc.nextInt();
+                sc.nextLine();
+                for (Product product : store.inventory)
+                {
+                    if (product.getId() == id)
+                    {
+                        product.setQuantity(quantity);
+                        break;
+                    }
+                }
+                break;
+
+                case 7:
+                System.out.println("<<< Checking Stock >>>");
+                for (Product product : store.inventory)
+                {
+                    System.out.println(product);
+                }
+                break;
+
+                case 8:
+                System.exit(0);
+                sc.close();
+                break;
+            }
+            
              switch (num) {
                  case 1 -> {
                      System.out.println("<<< Registering New Member >>>");
@@ -321,6 +502,7 @@ public class TestHarness
 
                 case 3:
                 System.out.println("< Exiting... >");
+                scan.close();
                 return;
             }
         }
