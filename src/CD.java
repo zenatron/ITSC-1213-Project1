@@ -1,9 +1,6 @@
 public class CD extends Product 
 {
-    private String album;
     //CDs are for audio and music
-    //Includes album field
-
     //Constructor
     public CD(String title, String author, String album, double cost) 
     {
@@ -18,6 +15,7 @@ public class CD extends Product
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();
+        result = 37 * result + album.hashCode();
         return result;
     }
 

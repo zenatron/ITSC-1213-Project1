@@ -1,9 +1,6 @@
 public class DVD extends Product
 {
-    private String album;
     //DVDs are for video formats
-    //Includes studio field
-
     //Constructor
     public DVD(String title, String author, String album, double cost) 
     {
@@ -18,6 +15,7 @@ public class DVD extends Product
         long result = 17;
         result = 37 * result + title.hashCode();
         result = 37 * result + author.hashCode();
+        result = 37 * result + album.hashCode();
         return result;
     }
 
