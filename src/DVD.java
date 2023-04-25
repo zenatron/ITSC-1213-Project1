@@ -7,8 +7,7 @@ public class DVD extends Product
     //Constructor
     public DVD(String title, String author, String album, double cost) 
     {
-        super(title, author, cost);
-        this.album = album;
+        super(title, author, album, cost);
         this.id = hash();
     }
 

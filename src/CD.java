@@ -7,8 +7,7 @@ public class CD extends Product
     //Constructor
     public CD(String title, String author, String album, double cost) 
     {
-        super(title, author, cost);
-        this.album = album;
+        super(title, author, album, cost);
         this.id = hash();
     }
 

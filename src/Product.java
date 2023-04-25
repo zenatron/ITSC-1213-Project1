@@ -2,15 +2,17 @@ public abstract class Product implements Comparable
 {
     protected String title;
     protected String author;
+    protected String album;
     protected long id;
     protected double cost;
     protected int quantity;
    
     //Constructor
-    public Product(String title, String author, double cost) 
+    public Product(String title, String author, String album, double cost)
     {
         this.title = title;
         this.author = author;
+        this.album = album;
         this.cost = cost;
         this.quantity = 0;
     }
@@ -50,6 +52,21 @@ public abstract class Product implements Comparable
     public double getCost() 
     {
         return cost;
+    }
+
+    public String getAuthor()
+    {
+        return author;
+    }
+
+    public String getAlbum()
+    {
+        return album;
+    }
+
+    public void setAlbum(String album)
+    {
+        this.album = album;
     }
 
     public int getQuantity() {
