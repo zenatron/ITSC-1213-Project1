@@ -215,7 +215,7 @@ public class TestHarness {
                     store.getProductByID(id).compareTo(store.getProductByID(id2));
                 }
                 case 9 -> {
-                    String report = "Daily Report:";
+                    String report = "*** Daily Report ***";
                     double dayRevenue = 0.0;
                     for(Transaction transaction : store.transactions)
                     {
@@ -237,7 +237,9 @@ public class TestHarness {
                     }
 
                     ReportGenerator.generateReport(report);
-                    //TODO: create end of day report, what products purchased, what members registered, total revenue
+
+                    InventoryUpdater.saveInventory(store.inventory);
+
                     //TODO: create new updated inventory file based on existing stock
                     System.exit(0);
                 }

@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class InventoryUpdater {
-    private String filename;
 
-    public String toCSV(ArrayList<Product> inventory)
+    public static String toCSV(ArrayList<Product> inventory)
     {
         String content = "";
         for (Product product : inventory)
         {
-            content += product.getClass().toString() + ",";
+            content += product.getClass().getName() + ",";
             content += product.getTitle() + ",";
             content += product.getAuthor() + ",";
             content += product.getAlbum() + ",";
@@ -23,8 +22,8 @@ public class InventoryUpdater {
         return content;
     }
 
-    public void saveInventory(ArrayList<Product> inventory) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+    public static void saveInventory(ArrayList<Product> inventory) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
         Date date = new Date();
         String timestamp = sdf.format(date);
         String newFilename = "inventory-" + timestamp + ".csv";
