@@ -23,9 +23,9 @@ public class TestHarness {
 
         //Prints out the size of the inventory and all test Members
         System.out.println(store.inventory.size());
-        System.out.println(member1.toString());
-        System.out.println(member2.toString());
-        System.out.println(member3.toString());
+        System.out.println(member1);
+        System.out.println(member2);
+        System.out.println(member3);
 
         // ________________________________________________________
         //DEBUG LINES
