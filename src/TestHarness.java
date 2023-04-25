@@ -37,8 +37,8 @@ public class TestHarness {
         //__________________________________________________________
 
         try {
-            String filePath = "./src/files/start.csv";
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            String startFilePath = "./src/files/start.csv";
+            BufferedReader reader = new BufferedReader(new FileReader(startFilePath));
 
             //Skip the first line
             String line = reader.readLine();
@@ -68,13 +68,50 @@ public class TestHarness {
                     cd.setQuantity(qty);
                     store.inventory.add(cd);
 
-                } else System.out.println("Incorrect type in file: " + filePath);
+                } else System.out.println("Incorrect type in file: " + startFilePath);
             }
             reader.close();
 
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
+
+
+        try {
+            String membersFilePath = "./src/files/members.csv";
+            BufferedReader reader = new BufferedReader(new FileReader(membersFilePath));
+
+            //Skip the first line
+            String line = reader.readLine();
+            while ((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+                String first = data[0];
+                String last = data[1];
+                double totalSpent = Double.parseDouble(data[3]);
+                String isPremium = data[4];
+
+                if (isPremium.equalsIgnoreCase("false")) {
+                    Member member = new Member(first, last);
+                    store.memberList.add(member);
+
+                } else if (isPremium.equalsIgnoreCase("true")) {
+                    PremiumMember premiumMember = new PremiumMember(first, last);
+                    store.memberList.add(premiumMember);
+
+                } else System.out.println("Incorrect type in file: " + membersFilePath);
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+
+
+
+
+
+
 
 
         //Prints out the size of the inventory and all test Members
