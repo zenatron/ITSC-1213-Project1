@@ -1,4 +1,4 @@
-public class DVD extends Product 
+public class DVD extends Product
 {
     private String album;
     //DVDs are for video formats
@@ -13,7 +13,7 @@ public class DVD extends Product
     }
 
     @Override
-    public long hash() 
+    public long hash()
     {
         //Returns generated hash
         long result = 17;
@@ -31,10 +31,11 @@ public class DVD extends Product
     }
 
     //Abstract method that allows copying of the object, from the Product class
+    @Override
     public Product copy()
     {
         DVD newDVD = new DVD(title, author, album, cost);
         newDVD.setQuantity(quantity);
         return newDVD;
-    }        
+    }
 }

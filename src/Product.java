@@ -1,4 +1,4 @@
-public abstract class Product 
+public abstract class Product implements Comparable
 {
     protected String title;
     protected String author;
@@ -19,12 +19,21 @@ public abstract class Product
     public abstract long hash();
 
     public abstract Product copy();
+
+    public void compareTo(Product other) //Allows comparison of products by cost
+    {
+        double difference = this.getCost() - other.getCost();
+
+        if (difference > 0)
+            System.out.println(this.getTitle() + " costs more: $" + this.getCost());
+        else if (difference < 0)
+            System.out.println(other.getTitle() + " costs more: $" + other.getCost());
+        else
+            System.out.println(this.getTitle() + " and " + other.getTitle() + " have the same cost: $" + this.getCost());
+    }
     
     //Prints the product variables
-    public String toString()
-    {
-        return "Product: " + title + " Author: " + author + " || with ID: " + id + " || price: " + cost + " || Qty: " + quantity;
-    }
+    public abstract String toString();
 
     //Getters for all the product variables
     //No setters because they don't change, except for quantity

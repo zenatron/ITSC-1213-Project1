@@ -31,6 +31,7 @@ public class Book extends Product
     }
 
     //Abstract method that allows copying of the object, from the Product class
+    @Override
     public Product copy()
     {
         Book newBook = new Book(title, author, album, cost);

@@ -1,25 +1,25 @@
 public class Member 
 {
-    private String firstName;
-    private String lastName;
-    private long id;
-    private boolean premium;
-    private double totalSpent;
+    protected String firstName;
+    protected String lastName;
+    protected long id;
+    protected double totalSpent;
+    protected ShoppingCart shoppingCart;
 
     //Constructor
-    public Member(String firstName, String lastName, boolean premium) 
+    public Member(String firstName, String lastName)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = hash();
-        this.premium = premium;
         this.totalSpent = 0.00;
+        shoppingCart = new ShoppingCart();
     }
 
     //Print method
-    public String toString() 
+    public String toString()
     {
-        return "Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Premium Status: " + premium + " | Total Spent: $" + totalSpent;
+        return "Member >> " + lastName + ", " + firstName + " | ID: " + id + " | Total Spent: $" + totalSpent;
     }
 
     //Returns generated member id from hash
@@ -30,8 +30,6 @@ public class Member
         result = 37 * result + lastName.hashCode();
         return result;
     }
-
-
     //Getters and setters for all the variables
     public String getFirstName() 
     {
@@ -53,16 +51,6 @@ public class Member
     public long getId() 
     {
         return id;
-    }
-    
-    public boolean isPremium() 
-    {
-        return premium;
-    }
-    
-    public void setPremium(boolean premium) 
-    {
-        this.premium = premium;
     }
 
     public double getTotalSpent() 

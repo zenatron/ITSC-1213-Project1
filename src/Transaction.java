@@ -13,7 +13,7 @@ public class Transaction
     //Constructor
     public Transaction(long id, long memberId, long productId, PaymentType paymentType, double amount)
     {
-        this.id = id;
+        this.id = hash();
         this.memberId = memberId;
         this.productId = productId;
         this.paymentType = paymentType;
@@ -27,9 +27,19 @@ public class Transaction
         return "Transaction >>> " + id + " ||Member: " + memberId + " ||Product: " + productId + " ||Amt: " + amount + " || Payment: " + paymentType +" ||Time: " + timestamp; 
     }
 
+    public long hash()
+    {
+        long random = (long) (Math.random() * Math.random() * 17);
+        long result = random;
+        result = 36 * result + String.valueOf(amount + random).hashCode();
+        result = 36 * result + (timestamp + random).hashCode();
+        result = 36 * result + String.valueOf(productId + random).hashCode();
+        return result;
+    }
+
     //Generic getters and setters
     public long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(long id) {
