@@ -212,7 +212,13 @@ public class TestHarness {
                     System.out.println("Result:");
                     store.getProductByID(id).compareTo(store.getProductByID(id2));
                 }
-                case 9 -> System.exit(0);
+                case 9 -> {
+                    String report = "Daily Report: ";
+                    //ReportGenerator.generateReport(report);
+                    //TODO: create end of day report, what products purchased, what members registered, total revenue
+                    //TODO: create new updated inventory file based on existing stock
+                    System.exit(0);
+                }
             }
         }
     }
