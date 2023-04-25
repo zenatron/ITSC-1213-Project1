@@ -7,21 +7,6 @@ import java.util.Date;
 
 public class InventoryUpdater {
 
-    public static String toCSV(ArrayList<Product> inventory)
-    {
-        String content = "";
-        for (Product product : inventory)
-        {
-            content += product.getClass().getName() + ",";
-            content += product.getTitle() + ",";
-            content += product.getAuthor() + ",";
-            content += product.getAlbum() + ",";
-            content += product.getCost() + ",";
-            content += product.getQuantity() + "\n";
-        }
-        return content;
-    }
-
     public static void saveInventory(ArrayList<Product> inventory) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss");
         Date date = new Date();
@@ -29,15 +14,19 @@ public class InventoryUpdater {
         String newFilename = "inventory-" + timestamp + ".csv";
 
         try {
+
             FileWriter fileWriter = new FileWriter("./src/files/" + newFilename);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             // Writes the header text
-            printWriter.println("Type,Title,Author,Album,Cost,Qty");
+            printWriter.write("Type,Title,Author,Album,Cost,Qty");
 
-            printWriter.println(toCSV(inventory));
+            for (Product product : inventory) {
+                printWriter.write("\n");
+                printWriter.write(product.getClass().getName() + "," + product.getTitle() + "," + product.getAuthor() + "," + product.getAlbum() + "," + product.getCost() + "," + product.getQuantity());
+            }
 
-            printWriter.flush();
+            fileWriter.flush();
             printWriter.close();
 
         } catch (IOException e) {

@@ -7,20 +7,6 @@ import java.util.Date;
 
 public class MemberUpdater {
 
-    public static String toCSV(ArrayList<Member> memberList)
-    {
-        String content = "";
-        for (Member member : memberList)
-        {
-            content += member.getFirstName() + ",";
-            content += member.getLastName() + ",";
-            content += member.getId() + ",";
-            content += member.getTotalSpent() + ",";
-            content += (member instanceof PremiumMember) + "\n";
-        }
-        return content;
-    }
-
     public static void saveMembers(ArrayList<Member> memberList) {
         String newFilename = "members.csv";
 
@@ -29,11 +15,14 @@ public class MemberUpdater {
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             // Writes the header text
-            printWriter.println("First,Last,ID,TotalSpent,Premium");
+            printWriter.write("First,Last,ID,TotalSpent,Premium");
 
-            printWriter.println(toCSV(memberList));
+            for (Member member : memberList) {
+                printWriter.write("\n");
+                printWriter.write(member.getFirstName() + "," + member.getLastName() + "," + member.getId() + "," + member.getTotalSpent() + "," + (member instanceof PremiumMember));
+            }
 
-            printWriter.flush();
+            fileWriter.flush();
             printWriter.close();
 
         } catch (IOException e) {
