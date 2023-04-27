@@ -17,13 +17,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/files/inventory-20230426-233340.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/src/files/members.csv">
           <value>
             <Attribute>
