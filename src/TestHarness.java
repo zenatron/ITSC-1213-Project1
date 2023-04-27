@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /*
  * @author me
@@ -106,29 +107,37 @@ public class TestHarness {
 
             switch (num) {
                 case 1 -> {
-                    System.out.println("<<< Registering New Member >>>");
-                    System.out.println("Enter First Name:");
-                    String firstName = sc.nextLine();
-                    System.out.println("Enter Last Name:");
-                    String lastName = sc.nextLine();
-                    System.out.println("Premium Member? (Y/N)");
-                    char letter = sc.next().charAt(0);
-                    boolean premium = letter == 'Y' || letter == 'y';
-                    Member newMember;
-                    if (premium) {
-                        newMember = new PremiumMember(firstName, lastName);
-                    } else {
-                        newMember = new Member(firstName, lastName);
+                    try {
+                        System.out.println("<<< Registering New Member >>>");
+                        System.out.println("Enter First Name:");
+                        String firstName = sc.nextLine();
+                        System.out.println("Enter Last Name:");
+                        String lastName = sc.nextLine();
+                        System.out.println("Premium Member? (Y/N)");
+                        char letter = sc.next().charAt(0);
+                        boolean premium = letter == 'Y' || letter == 'y';
+                        Member newMember;
+                        if (premium) {
+                            newMember = new PremiumMember(firstName, lastName);
+                        } else {
+                            newMember = new Member(firstName, lastName);
+                        }
+                        store.addMember(newMember);
+                        System.out.println("New Member Registered with Credentials:");
+                        System.out.println(newMember);
+                        membersAddedToday.add(newMember);
+                    } catch (Exception e) {
+                        System.err.println("Error Registering a Member. " + e.getMessage());
                     }
-                    store.addMember(newMember);
-                    System.out.println("New Member Registered with Credentials:");
-                    System.out.println(newMember);
-                    membersAddedToday.add(newMember);
                 }
                 case 2 -> {
-                    System.out.println("<<< Viewing Member List >>>");
-                    for (Member member : store.memberList) {
-                        System.out.println(member);
+                    try {
+                        System.out.println("<<< Viewing Member List >>>");
+                        for (Member member : store.memberList) {
+                            System.out.println(member);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error Viewing Members. " + e.getMessage());
                     }
                 }
                 case 3 -> {
@@ -136,112 +145,139 @@ public class TestHarness {
                     purchaseOptions(store);
                 }
                 case 4 -> {
-                    System.out.println("<<< Viewing Transaction List >>>");
-                    for (Transaction transaction : store.transactions) {
-                        System.out.println(transaction);
+                    try {
+                        System.out.println("<<< Viewing Transaction List >>>");
+                        for (Transaction transaction : store.transactions) {
+                            System.out.println(transaction);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error Viewing Transactions. " + e.getMessage());
                     }
                 }
                 case 5 -> {
-                    System.out.println("<<< Adding a New Product >>>");
-                    System.out.println("Enter the title of the product");
-                    String title = sc.nextLine();
-                    System.out.println("Enter the author of the product");
-                    String author = sc.nextLine();
-                    System.out.println("Enter the album of the product");
-                    String album = sc.nextLine();
-                    System.out.println("Enter the cost of the product");
-                    double newProductCost = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.println("What kind of product is it? (CD/DVD/Book)");
-                    String type = sc.nextLine();
-                    System.out.println("Enter many units to add");
-                    int units = sc.nextInt();
-                    sc.nextLine();
-                    if ("book".equalsIgnoreCase(type)) {
-                        store.addIntoInventory(new Book(title, author, album, newProductCost), units);
-                    } else if ("cd".equalsIgnoreCase(type)) {
-                        store.addIntoInventory(new CD(title, author, album, newProductCost), units);
-                    } else if ("dvd".equalsIgnoreCase(type)) {
-                        store.addIntoInventory(new DVD(title, author, album, newProductCost), units);
+                    try {
+                        System.out.println("<<< Adding a New Product >>>");
+                        System.out.println("Enter the title of the product");
+                        String title = sc.nextLine();
+                        System.out.println("Enter the author of the product");
+                        String author = sc.nextLine();
+                        System.out.println("Enter the album of the product");
+                        String album = sc.nextLine();
+                        System.out.println("Enter the cost of the product");
+                        double newProductCost = sc.nextDouble();
+                        sc.nextLine();
+                        System.out.println("What kind of product is it? (CD/DVD/Book)");
+                        String type = sc.nextLine();
+                        System.out.println("Enter many units to add");
+                        int units = sc.nextInt();
+                        sc.nextLine();
+                        if ("book".equalsIgnoreCase(type)) {
+                            store.addIntoInventory(new Book(title, author, album, newProductCost), units);
+                        } else if ("cd".equalsIgnoreCase(type)) {
+                            store.addIntoInventory(new CD(title, author, album, newProductCost), units);
+                        } else if ("dvd".equalsIgnoreCase(type)) {
+                            store.addIntoInventory(new DVD(title, author, album, newProductCost), units);
+                        }
+                    } catch (InputMismatchException e) {
+                        System.err.println("You entered a wrong value. " + e.getMessage());
+                    } catch (Exception e) {
+                        System.err.println("Error Adding a Product. " + e.getMessage());
                     }
                 }
                 case 6 -> {
-                    System.out.println("<<< Adding into Inventory >>>");
-                    System.out.println("Enter the ID of the product to edit");
-                    long id = sc.nextLong();
-                    sc.nextLine();
-                    if (store.getProductByID(id) == null) {
-                        System.out.println("Sorry, this product does not exist in inventory.");
-                        break;
-                    } else {
-                        System.out.println("Enter the quantity to restock:");
+                    try {
+                        System.out.println("<<< Adding into Inventory >>>");
+                        System.out.println("Enter the ID of the product to edit");
+                        long id = sc.nextLong();
+                        sc.nextLine();
+                        if (store.getProductByID(id) == null) {
+                            System.out.println("Sorry, this product does not exist in inventory.");
+                            break;
+                        } else {
+                            System.out.println("Enter the quantity to restock:");
+                        }
+                        int quantity = sc.nextInt();
+                        sc.nextLine();
+                        store.restockProduct(store.getProductByID(id), quantity);
+                    } catch (InputMismatchException e) {
+                        System.err.println("You entered a wrong value. " + e.getMessage());
+                    } catch (Exception e) {
+                        System.err.println("Error Adding to Inventory. " + e.getMessage());
                     }
-                    int quantity = sc.nextInt();
-                    sc.nextLine();
-                    store.restockProduct(store.getProductByID(id), quantity);
                 }
                 case 7 -> {
-                    System.out.println("<<< Checking Stock >>>");
-                    for (Product product : store.inventory) {
-                        System.out.println(product);
+                    try {
+                        System.out.println("<<< Checking Stock >>>");
+                        for (Product product : store.inventory) {
+                            System.out.println(product);
+                        }
+                        System.out.println("\n\tStore's inventory value:\n\t$" + store.inventoryValue());
+                    } catch (Exception e) {
+                        System.err.println("Error Checking Stock. " + e.getMessage());
                     }
-                    System.out.println("\n\tStore's inventory value:\n\t$" + store.inventoryValue());
                 }
                 case 8 -> {
-                    System.out.println("<<< Comparing Products by Cost >>>");
-                    for (Product product : store.inventory) {
-                        System.out.println(product);
-                    }
-                    System.out.println("\nEnter the ID of the first product to compare:");
-                    long id = sc.nextLong();
-                    sc.nextLine();
-                    if (store.getProductByID(id) == null) {
-                        System.out.println("Sorry, this product does not exist in inventory.");
-                        break;
-                    } else {
-                        System.out.println(store.getProductByID(id).getTitle());
-                    }
-                    System.out.println("\nEnter the ID of the second product to compare:");
-                    long id2 = sc.nextLong();
-                    sc.nextLine();
-                    if (store.getProductByID(id2) == null) {
-                        System.out.println("Sorry, this product does not exist in inventory.");
-                        break;
-                    } else {
-                        System.out.println(store.getProductByID(id2).getTitle());
-                    }
-                    System.out.println("Result:");
-                    store.getProductByID(id).compareTo(store.getProductByID(id2));
-                }
-                case 9 -> {
-                    String report = "*** Daily Report ***";
-                    double dayRevenue = 0.0;
-                    for(Transaction transaction : store.transactions)
-                    {
-                        report += "\nTransaction Added: " + transaction;
-                        dayRevenue += transaction.getAmount();
-                    }
-                    report += "\nTotal Revenue Today: $" + dayRevenue;
-
-                    if (membersAddedToday.isEmpty())
-                    {
-                        report += "\nNo new members added today.";
-                    }
-                    else
-                    {
-                        for(Member member : membersAddedToday)
-                        {
-                            report += "\nMember Added: " + member;
+                    try {
+                        System.out.println("<<< Comparing Products by Cost >>>");
+                        for (Product product : store.inventory) {
+                            System.out.println(product);
                         }
+                        System.out.println("\nEnter the ID of the first product to compare:");
+                        long id = sc.nextLong();
+                        sc.nextLine();
+                        if (store.getProductByID(id) == null) {
+                            System.out.println("Sorry, this product does not exist in inventory.");
+                            break;
+                        } else {
+                            System.out.println(store.getProductByID(id).getTitle());
+                        }
+                        System.out.println("\nEnter the ID of the second product to compare:");
+                        long id2 = sc.nextLong();
+                        sc.nextLine();
+                        if (store.getProductByID(id2) == null) {
+                            System.out.println("Sorry, this product does not exist in inventory.");
+                            break;
+                        } else {
+                            System.out.println(store.getProductByID(id2).getTitle());
+                        }
+                        System.out.println("Result:");
+                        store.getProductByID(id).compareTo(store.getProductByID(id2));
+                    } catch (InputMismatchException e) {
+                        System.err.println("You entered a wrong value. " + e.getMessage());
+                    } catch (Exception e) {
+                        System.err.println("Error Comparing Products. " + e.getMessage());
                     }
+                }
 
-                    ReportGenerator.generateReport(report);
 
-                    InventorySaver.saveInventory(store.inventory);
+                case 9 -> {
+                    try {
+                        StringBuilder report = new StringBuilder("*** Daily Report ***");
+                        double dayRevenue = 0.0;
+                        for (Transaction transaction : store.transactions) {
+                            report.append("\nTransaction Added: ").append(transaction);
+                            dayRevenue += transaction.getAmount();
+                        }
+                        report.append("\nTotal Revenue Today: $").append(dayRevenue);
 
-                    MemberSaver.saveMembers(store.memberList);
+                        if (membersAddedToday.isEmpty()) {
+                            report.append("\nNo new members added today.");
+                        } else {
+                            for (Member member : membersAddedToday) {
+                                report.append("\nMember Added: ").append(member);
+                            }
+                        }
 
-                    System.exit(0);
+                        ReportGenerator.generateReport(report.toString());
+
+                        InventorySaver.saveInventory(store.inventory);
+
+                        MemberSaver.saveMembers(store.memberList);
+
+                        System.exit(0);
+                    } catch (Exception e) {
+                        System.err.println("Error Generating Report. " + e.getMessage());
+                    }
                 }
             }
         }
@@ -266,95 +302,101 @@ public class TestHarness {
             scan.nextLine();
 
             switch (cartNum) {
-                case 1:
-                    System.out.println("< Adding Items to Cart >");
+                case 1 -> {
+                    try {
+                        System.out.println("< Adding Items to Cart >");
 
-                    System.out.println("Enter ID of Buyer");
-                    long id = scan.nextLong();
-                    scan.nextLine();
-                    if (store.getMemberByID(id) == null) {
-                        System.out.println("Sorry, this person does not exist in the system.");
-                        break;
-                    } else {
-                        System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
-                    }
+                        System.out.println("Enter ID of Buyer");
+                        long id = scan.nextLong();
+                        scan.nextLine();
+                        if (store.getMemberByID(id) == null) {
+                            System.out.println("Sorry, this person does not exist in the system.");
+                            break;
+                        } else {
+                            System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                        }
 
-                    System.out.println("Type product ID to add to cart:");
-                    long itemToAdd = scan.nextLong();
-                    scan.nextLine();
-                    if (store.getProductByID(itemToAdd) == null) {
-                        System.out.println("Sorry, this product does not exist in inventory.");
-                        break;
-                    } else {
-                        System.out.println(store.getProductByID(itemToAdd).getTitle());
-                    }
+                        System.out.println("Type product ID to add to cart:");
+                        long itemToAdd = scan.nextLong();
+                        scan.nextLine();
+                        if (store.getProductByID(itemToAdd) == null) {
+                            System.out.println("Sorry, this product does not exist in inventory.");
+                            break;
+                        } else {
+                            System.out.println(store.getProductByID(itemToAdd).getTitle());
+                        }
 
-                    System.out.println("Enter the quantity to add to cart:");
-                    int quantityToBuy = scan.nextInt();
-                    scan.nextLine();
+                        System.out.println("Enter the quantity to add to cart:");
+                        int quantityToBuy = scan.nextInt();
+                        scan.nextLine();
 
-                    for (Product product : store.inventory) {
-                        //Adds the product to cart if the title matches
-                        if (product.getId() == itemToAdd) {
-                            //Confirms whether we have the requested number in stock
-                            if (product.getQuantity() < quantityToBuy) {
-                                System.out.println("We only have " + product.getQuantity() + " in stock of - " + product.getTitle());
-                                System.out.println("Purchase failed.");
-                                break;
-                            } else {
-                                store.getMemberByID(id).shoppingCart.addIntoInventory(product, quantityToBuy);
-                                break;
+                        for (Product product : store.inventory) {
+                            //Adds the product to cart if the title matches
+                            if (product.getId() == itemToAdd) {
+                                //Confirms whether we have the requested number in stock
+                                if (product.getQuantity() < quantityToBuy) {
+                                    System.out.println("We only have " + product.getQuantity() + " in stock of - " + product.getTitle());
+                                    System.out.println("Purchase failed.");
+                                    break;
+                                } else {
+                                    store.getMemberByID(id).shoppingCart.addIntoInventory(product, quantityToBuy);
+                                    break;
+                                }
                             }
                         }
+                    } catch (InputMismatchException e) {
+                        System.err.println("You entered a wrong value. " + e.getMessage());
+                    } catch (Exception e) {
+                        System.err.println("Error Adding to Cart. " + e.getMessage());
                     }
-                    break;
-
-                case 2:
-                    Member buyer = null;
-                    System.out.println("< Checking Out >");
-
-                    System.out.println("Confirm ID of Buyer");
-                    id = scan.nextLong();
-                    scan.nextLine();
-                    if (store.getMemberByID(id) == null) {
-                        System.out.println("Sorry, this person does not exist in the system.");
-                        break;
-                    } else {
-                        System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
-                        buyer = store.getMemberByID(id);
-                    }
-
-                    System.out.println("Confirm Items in Cart:");
-                    for (Product item : buyer.shoppingCart.contents) {
-                        System.out.println(item.getTitle() + " qty: " + item.getQuantity());
-                    }
-
-                    System.out.println("Total Cost in cart:\n\t$" + buyer.shoppingCart.calculateCartTotal());
-
-                    System.out.println("Enter Payment Type: (feature not implemented)");
-                    PaymentType pType = new PaymentType();
-
-                    System.out.println("Ready to Buy? (Y/N)");
-                    char ready = scan.nextLine().charAt(0);
-                    if (ready == 'Y' || ready == 'y') {
+                }
+                case 2 -> {
+                    try {
+                        Member buyer = null;
+                        System.out.println("< Checking Out >");
+                        System.out.println("Confirm ID of Buyer");
+                        long id = scan.nextLong();
+                        scan.nextLine();
+                        if (store.getMemberByID(id) == null) {
+                            System.out.println("Sorry, this person does not exist in the system.");
+                            break;
+                        } else {
+                            System.out.println(store.getMemberByID(id).getFirstName() + " " + store.getMemberByID(id).getLastName());
+                            buyer = store.getMemberByID(id);
+                        }
+                        System.out.println("Confirm Items in Cart:");
                         for (Product item : buyer.shoppingCart.contents) {
-                            if (store.makePurchase(buyer, item, item.getQuantity(), pType)) {
-                                System.out.println("Successfully purchased " + item.getTitle());
-                            } else {
-                                System.out.println("---- Something went wrong! ----");
-                            }
+                            System.out.println(item.getTitle() + " qty: " + item.getQuantity());
                         }
-                        System.out.println("<< Thank you for shopping at Bookstore! >>");
-                        buyer.shoppingCart.contents.clear();
-                    } else {
-                        System.out.println("Transaction Cancelled");
-                        buyer.shoppingCart.contents.clear();
+                        System.out.println("Total Cost in cart:\n\t$" + buyer.shoppingCart.calculateCartTotal());
+                        System.out.println("Enter Payment Type: (feature not implemented)");
+                        PaymentType pType = new PaymentType();
+                        System.out.println("Ready to Buy? (Y/N)");
+                        char ready = scan.nextLine().charAt(0);
+                        if (ready == 'Y' || ready == 'y') {
+                            for (Product item : buyer.shoppingCart.contents) {
+                                if (store.makePurchase(buyer, item, item.getQuantity(), pType)) {
+                                    System.out.println("Successfully purchased " + item.getTitle());
+                                } else {
+                                    System.out.println("---- Something went wrong! ----");
+                                }
+                            }
+                            System.out.println("<< Thank you for shopping at Bookstore! >>");
+                            buyer.shoppingCart.contents.clear();
+                        } else {
+                            System.out.println("Transaction Cancelled");
+                            buyer.shoppingCart.contents.clear();
+                        }
+                    } catch (InputMismatchException e) {
+                        System.err.println("You entered a wrong value. " + e.getMessage());
+                    } catch (Exception e) {
+                        System.err.println("Error Checking Out. " + e.getMessage());
                     }
-                    break;
-
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("< Exiting... >");
                     return;
+                }
             }
         }
     }
