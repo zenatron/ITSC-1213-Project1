@@ -53,7 +53,6 @@ public class TestHarness {
             System.err.println("Error reading file: " + e.getMessage());
         }
 
-
         try {
             String membersFilePath = "./src/files/members.csv";
             BufferedReader reader = new BufferedReader(new FileReader(membersFilePath));
@@ -85,7 +84,6 @@ public class TestHarness {
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
         }
-
 
         System.out.println(store.inventory.size());
 
